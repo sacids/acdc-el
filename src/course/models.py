@@ -9,13 +9,17 @@ from django.utils.text import slugify
 class Course(BaseModel):
     title           = models.CharField(max_length=200)
     summary         = models.TextField(max_length=500)
-    description     = models.TextField()
+    description     = models.TextField(blank=True, null=True)
     byline          = models.CharField(max_length=250, blank=True, null=True)
     icon            = models.CharField(max_length=50)
     image           = models.CharField(max_length=50,blank=True, null=True)
-    active          = models.BooleanField()
-    featured        = models.BooleanField()
+    active          = models.BooleanField(default=True)
+    featured        = models.BooleanField(default=True)
     category        = models.ForeignKey('Category', related_name='course_category',on_delete=models.PROTECT)
+    duration        = models.DurationField(default=timedelta)
+    max_students    = models.IntegerField(default=50)
+    instructor      = models.ForeignKey(User, related_name='instructor',on_delete=models.PROTECT,default=1)
+    start_date      = models.DateField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
         return self.title if self.title else self.course_id
@@ -32,14 +36,13 @@ class Course(BaseModel):
 
 class Course_meta(models.Model):
 
-    crs             = models.ForeignKey('Course', on_delete=models.CASCADE)
+    crs             = models.OneToOneField('Course', on_delete=models.CASCADE)
     duration        = models.DurationField(default=timedelta)
     max_students    = models.IntegerField()
-    instructor      = models.ForeignKey(User, related_name='instructor',on_delete=models.PROTECT)
     start_date      = models.DateField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
-        return self.course_meta_id
+        pass
 
     class Meta:
         db_table    = 'el_course_meta'

@@ -11,9 +11,9 @@ class CourseListView(generic.ListView):
 
     def get_queryset(self, *args, **kwargs):
         if self.kwargs:
-            return Course.objects.filter(category=self.kwargs['category_id']).order_by('-created_on')
+            return Course.objects.select_related('instructor').filter(category=self.kwargs['category_id']).order_by('-created_on')
         else:
-            return Course.objects.all().order_by('-created_on')
+            return Course.objects.select_related('instructor').all().order_by('-created_on')
         
     
 class CourseDetailView(generic.DetailView):
@@ -25,6 +25,5 @@ class CourseDetailView(generic.DetailView):
             context             = super(CourseDetailView, self).get_context_data(**kwargs)
             context['lessons']  = Lesson.objects.filter(crs_id=course_id)
             context['featured_courses'] = Course.objects.filter(featured=True)
-            context['course_meta']      = Course_meta.objects.filter(crs_id=course_id)
             return context
 
