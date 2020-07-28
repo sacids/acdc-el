@@ -19,7 +19,7 @@ class Course(BaseModel):
     duration        = models.DurationField(default=timedelta)
     max_students    = models.IntegerField(default=50)
     instructor      = models.ForeignKey(User, related_name='instructor',on_delete=models.PROTECT,default=1)
-    start_date      = models.DateField(auto_now=False, auto_now_add=False)
+    start_date      = models.DateField(auto_now=False, auto_now_add=False,blank=True)
 
     def __str__(self):
         return self.title if self.title else self.course_id
