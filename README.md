@@ -12,6 +12,11 @@ This project has the following basic apps:
 
 ### Quick start
 
+Clone Repository
+
+    1. git clone https://github.com/sacids/acdc-el.git
+    2. cd acdc-el
+
 To set up a development environment quickly, first install Python 3. It
 comes with virtualenv built-in. So create a virtual env by:
 
@@ -22,8 +27,15 @@ Install all dependencies:
 
     pip install -r requirements.txt
 
+Update Database settings
+    1. Create database
+    2. open for editing src/learn/setting/local.env 
+    3. DATABASE_URL=postgres://<usernamme>:<password>@127.0.0.1:5432/<database>
+
 Run migrations:
 
+    cd src/
+    python manage.py makemigrations
     python manage.py migrate
 
 ### Detailed instructions
