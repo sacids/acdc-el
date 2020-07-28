@@ -28,6 +28,7 @@ Install all dependencies:
     pip install -r requirements.txt
 
 Update Database settings
+    1. Install your database driver (for postgress: pip install psycopg2-binary)
     1. Create database
     2. open for editing src/learn/setting/local.env 
     3. DATABASE_URL=postgres://<usernamme>:<password>@127.0.0.1:5432/<database>
