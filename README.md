@@ -39,6 +39,7 @@ Run migrations:
     python manage.py makemigrations
     python manage.py migrate
 
+Run init script
 ### Detailed instructions
 
 Take a look at the docs for more information.
