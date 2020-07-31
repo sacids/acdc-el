@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 import profiles.urls
-import accounts.urls, course.urls
+import accounts.urls, course.urls, utils.urls
 from . import views
 
 # Personalized admin site settings like title and header

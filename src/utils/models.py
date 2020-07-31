@@ -3,6 +3,8 @@ from authtools.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from _datetime import timedelta
+from django.urls import reverse
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -36,10 +38,17 @@ class el_path(models.Model):
     description     = models.TextField(blank=True, null=True)
     slug            = models.SlugField()
     photo           = models.ImageField(upload_to='course/photos')
+    featured        = models.BooleanField(default=False)
 
 
     def __str__(self):
         return self.title if self.title else self.pk
+
+    def get_slug(self):
+        return slugify(self.title)
+
+    def get_absolute_url(self):
+        return reverse('course:course_detail', kwargs={'pk': self.pk, 'slug': self.get_slug()})
     
     class Meta:
         db_table = 'el_paths'

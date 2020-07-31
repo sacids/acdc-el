@@ -1,0 +1,70 @@
+{% load staticfiles %}
+{% load thumbnail %}
+   
+    <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="#sidebar-menu" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i class="fa fa-ellipsis-v"></i></a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand   navbar-brand-logo navbar-nav-padding-left">
+            <a class="svg" href="app-student-dashboard.html">
+              ACDC-EL
+            </a>
+          </div>
+        </div>
+
+        
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="main-nav">
+        
+          <div class="nav navbar-nav panel-heading">
+            {% block reg_course_title %}{% endblock %}
+          </div>
+
+          <ul class="nav navbar-nav">
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-nav-bordered navbar-right">
+            <!-- notifications -->
+            <li class="dropdown notifications updates">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <span class="badge badge-primary">4</span>
+              </a>
+              <ul class="dropdown-menu" role="notification">
+                <li class="dropdown-header">Notifications</li>
+                
+              </ul>
+            </li>
+            <!-- // END notifications -->
+            <!-- User -->
+            {% if user.is_authenticated %}
+                <!-- user -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="{% thumbnail user.profile.picture|default:'default_profile.png' 30x30 crop %}" alt="" class="img-circle" /> {{ user.get_full_name|truncatechars:20 }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                    <li><a href="website-student-dashboard.html"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
+                    <li><a href="website-student-courses.html"><i class="fa fa-mortar-board"></i> My Courses</a></li>
+                    <li><a href="website-student-profile.html"><i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    </ul>
+                </li>
+                <!-- // END user -->
+            {% endif %}
+
+
+
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+      </div>
+    </div>

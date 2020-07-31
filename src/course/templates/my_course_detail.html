@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+
+{% block reg_course_title %}
+  <h1 class="text-display-1 margin-none">{{ course.title }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="lesson_content">
+  Lesson details
+</div>
+<div class="lesson_attr">
+  Tab list of activities that may be done within lesson
+</div>
+{% endblock %}
+

@@ -1,0 +1,20 @@
+
+.mix-blend{
+    color: white;
+    mix-blend-mode: difference;
+}
+
+.show-sidebar.sidebar-r3 #content{
+    margin-right: 320px;
+}
+
+.sidebar-size-3{
+    width: 320px;
+}
+
+.lesson_content{
+
+    height: 60vh;
+    width: 100%;
+    background-color: brown;
+}
