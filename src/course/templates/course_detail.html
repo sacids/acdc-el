@@ -2,12 +2,12 @@
 {% load staticfiles %}
 
 {% block 'page-title' %} 
-  <div class="parallax bg-white page-section">
+  <div class="parallax bg-white page-section" style="background-image: url({{course.photo.url}})">
     <div class="container parallax-layer" data-opacity="true">
       <div class="media v-middle">
         <div class="media-body">
-          <h1 class="text-display-2 margin-none">{{ course.title }}</h1>
-          <p class="text-light lead">{{ course.byline }}</p>
+          <h1 class="text-display-2 margin-none mix-blend">{{ course.title }}</h1>
+          <p class="text-light lead mix-blend">{{ course.byline }}</p>
         </div>
         <div class="media-right">
           <a class="btn btn-white" href="{% url 'course:course_list' %}">Course List</a>
