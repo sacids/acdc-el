@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Course, Lesson, Course_meta
 from utils.models import *
 from django.views import generic
 from django.contrib.auth.models import User
@@ -8,7 +7,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 class PathListView(generic.ListView):
-    model                   = el_path
+    model                   = ElPath
     context_object_name     = 'course_list'
     #template_name           = "course_list.html"
     paginate_by             = 8
@@ -21,12 +20,12 @@ class PathListView(generic.ListView):
 
     def get_queryset(self, *args, **kwargs):
         if self.kwargs:
-            return el_path.objects.select_related('category').filter(category=self.kwargs['category_id']).order_by('-created_on')
+            return ElPath.objects.select_related('category').filter(category=self.kwargs['category_id']).order_by('-created_on')
         else:
-            return el_path.objects.select_related('category').all().order_by('-created_on')
+            return ElPath.objects.select_related('category').all().order_by('-created_on')
 
 class PathDetailView(generic.DetailView):
-    model                   = el_path
+    model                   = ElPath
     context_object_name     = 'course'
     template_name           = "course_detail.html"
 
