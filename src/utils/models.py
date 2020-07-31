@@ -23,7 +23,6 @@ class ElPath(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(
         User, on_delete=models.SET_DEFAULT, default=1)
-
     sort_order = models.PositiveIntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=300)
@@ -31,6 +30,7 @@ class ElPath(models.Model):
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField()
     photo = models.ImageField(upload_to='course/photos')
+    featured = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title if self.title else self.pk
@@ -95,7 +95,7 @@ class Lessons(models.Model):
         'Lessons', on_delete=models.DO_NOTHING, blank=True, null=True)
     content = models.FileField(
         upload_to='course/lessons/videos', max_length=100)
-    el_path = models.ForeignKey(Section, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
     duration = models.DurationField(timedelta())
     sort_order = models.PositiveIntegerField(default=0)
 
