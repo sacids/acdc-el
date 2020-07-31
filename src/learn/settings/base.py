@@ -70,13 +70,19 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    #installed package
     "authtools",
     "crispy_forms",
     "easy_thumbnails",
+    "rest_framework",
+
+    #apps
     "profiles",
     "accounts",
     "course",
     "utils",
+    "api",
 )
 
 MIDDLEWARE = [

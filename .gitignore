@@ -26,6 +26,7 @@ local.env
 # Django stuff:
 *.mo
 *.pot
+django.code-workspace
 
 # Eclipse
 .project

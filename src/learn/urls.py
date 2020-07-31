@@ -17,7 +17,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(accounts.urls)),
     path("web/", views.Web.as_view(), name="Web"),
-    path("course/", include(course.urls)),
+    #path("course/", include(course.urls)),
+
+    #api
+    path('api/', include('api.urls'))
 ]
 
 # User-uploaded files like profile pics need to be served in development
