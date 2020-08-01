@@ -46,7 +46,7 @@ class PathDetailView(generic.DetailView):
 #section
 class SectionListView(generic.ListView):
     model           = Section
-    template_name = "course/sections/lists.html"
+    template_name = "sections/lists.html"
 
     def get_queryset(self, *args, **kwargs):
         if self.kwargs:
@@ -57,21 +57,21 @@ class SectionListView(generic.ListView):
 
 class SectionDetailView(generic.DetailView):
     model                = Section
-    template_name        = "course/sections/details.html"
+    template_name        = "sections/details.html"
     context_object_name  = "section"
 
 
 class SectionCreateView(generic.CreateView):
-    model           = Section
-    template_name   = ""
-    fields          = ('title', 'description', 'el_path', 'sort_order', 'publish',)
+    model               = Section
+    template_name       = "sections/create.html"
+    fields              = ('title', 'el_path', 'sort_order', 'publish',)
 
 
 class SectionUpdateView(generic.UpdateView): 
     model                   = Section
-    template_name           = 'course/sections/edit.html'
+    template_name           = 'sections/edit.html'
     context_object_name     = 'section'
-    fields                  = ('title', 'description', 'el_path', 'sort_order', 'publish',)
+    fields                  = ('title', 'el_path', 'sort_order', 'publish',)
 
 
 class SectionDeleteView(generic.DeleteView):
@@ -82,7 +82,7 @@ class SectionDeleteView(generic.DeleteView):
 #lessons
 class LessonListView(generic.ListView):
     model         = Lesson
-    template_name = "course/lessons/lists.html"
+    template_name = "lessons/lists.html"
 
     def get_queryset(self, *args, **kwargs):
         if self.kwargs:
@@ -93,19 +93,19 @@ class LessonListView(generic.ListView):
 
 class LessonDetailView(generic.DetailView):
     model               = Lesson
-    template_name       = "course/lessons/details.html"
+    template_name       = "lessons/details.html"
     context_object_name = "lesson"
 
 
 class LessonCreateView(generic.CreateView):
     model               = Lesson
-    template_name       = "course/lessons/create.html"
+    template_name       = "lessons/create.html"
     fields              = ('title', 'description', 'publish', 'prerequisite','content', 'section', 'duration', 'sort_order',)
 
 
 class LessonUpdateView(generic.UpdateView):
     model               = Lesson
-    template_name       = 'course/lessons/edit.html'
+    template_name       = 'lessons/edit.html'
     context_object_name = 'lesson'
     fields = fields     = ('title', 'description', 'publish', 'prerequisite','content', 'section', 'duration', 'sort_order',)
 
