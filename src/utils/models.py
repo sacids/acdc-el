@@ -87,12 +87,12 @@ class Section(models.Model):
         managed = True
 
 
-class Lessons(models.Model):
+class Lesson(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     prerequisite = models.ForeignKey(
-        'Lessons', on_delete=models.DO_NOTHING, blank=True, null=True)
+        'Lesson', on_delete=models.DO_NOTHING, blank=True, null=True)
     content = models.FileField(
         upload_to='course/lessons/videos', max_length=100)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
