@@ -107,7 +107,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
     {% include "app/_sidebar_left.html" %} 
 
-    {% include "app/_sidebar_right.html" %} 
+    <div class="sidebar right sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-skin-white" id="sidebar-library">
+        <div data-scrollable>
+          {% block "sidebar_right" %}{% include "app/_sidebar_right.html" %}{% endblock %}
+        </div>
+    </div>
 
     <!-- sidebar effects OUTSIDE of st-pusher: -->
     <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
@@ -172,6 +176,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
  
   <script src="{% static 'site/js/vendor/all.js' %}"></script>
   <script src="{% static 'site/js/app/app.js' %}"></script>
+  <script src="{% static 'site/js/app/site.js' %}"></script>
 
 </body>
 

@@ -7,16 +7,19 @@
 
 {% block content %}
 <div class="lesson_content">
-  Lesson details
+  <video id="lesson_content_vid" controls autoplay>
+    <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
 </div>
 <div class="lesson_attr">
     <!-- Tabs -->
     <div class="course-tabs">
-      <div class="item"><a href="#home"><i class="fa fa-fw fa-home"></i> Overview</a></div>
-      <div class="item"><a href="#profile"><i class="fa fa-fw fa-user"></i> Q&A</a></div>
-      <div class="item"><a href="#messages"><i class="fa fa-fw fa-envelope"></i> Announcements</a></div>
-      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i> Resources</a></div>
-      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i> Notes</a></div>
+      <div class="item"><a href="#home"><i class="fa fa-fw fa-home"></i>Overview</a></div>
+      <div class="item"><a href="#profile"><i class="fa fa-fw fa-user"></i>Q&A</a></div>
+      <div class="item"><a href="#messages"><i class="fa fa-fw fa-envelope"></i>Announcements</a></div>
+      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i>Resources</a></div>
+      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i>Notes</a></div>
     </div>
     <!-- // END Tabs -->
 
@@ -30,3 +33,23 @@
 </div>
 {% endblock %}
 
+
+{% block "sidebar_right" %}
+<div class="section_title">Course Content</div>
+<div class="sidebar-block list-group list-group-menu list-group-minimal">
+  {% for section in curriculum %}
+    <div class="list-group-item1 section_item ripple ripple-dark-fade" wrp_id="section_{{ section.id }}">
+      <div class="section_item_txt">Section {{ section.title|truncatechars:60 }}</div>
+      <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
+    </div>
+    <div class="lesson_wrp" id="section_{{ section.id }}">
+    {% for l in section.lesson.all %}
+      <div class="lesson_item" lesson_src="{{ l.content.url }}">
+        <div class="lesson_cb"><i class="far fa-square"></i></div>
+        <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }} </div>
+      </div>
+    {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
