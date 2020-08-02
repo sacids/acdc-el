@@ -56,9 +56,18 @@ video{
     font-size: 1.2em;
     font-weight: 500;
     color: #383636;
+
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+}
+.sidebar-block{
+    top: 70px;
+    position: relative;
 }
 .section_item{
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgb(236, 235, 235);
     padding: 10px;
     font-size: 1.25em;
     font-weight: 500;
@@ -67,9 +76,6 @@ video{
     display: flex;
     flex-wrap: nowrap;
     cursor: pointer;
-}
-.section_item:hover{
-    background-color: rgb(248, 245, 245);
 }
 .section_item_txt{
     width: 335px;
@@ -84,8 +90,8 @@ video{
     height: 50px;
     font-size: 1.1em;
 }
-.lesson_item:hover{
-    background-color: rgb(248, 245, 245);
+.lesson_item:hover, .section_item:hover{
+    background-color: rgba(161, 159, 159, 0.178);
 }
 .lesson_item:last-child{
     border-bottom: 1px solid #ccc;
@@ -97,4 +103,9 @@ video{
 .lesson_txt{
     width:330px;
     padding: 10px 10px 10px 10px;
+}
+
+
+.active_item{
+    background-color: rgb(215, 240, 223);
 }

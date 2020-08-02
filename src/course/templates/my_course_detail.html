@@ -39,7 +39,7 @@
 <div class="sidebar-block list-group list-group-menu list-group-minimal">
   {% for section in curriculum %}
     <div class="list-group-item1 section_item ripple ripple-dark-fade" wrp_id="section_{{ section.id }}">
-      <div class="section_item_txt">Section {{ section.title|truncatechars:60 }}</div>
+      <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>
       <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
     </div>
     <div class="lesson_wrp" id="section_{{ section.id }}">
@@ -51,5 +51,7 @@
     {% endfor %}
     </div>
   {% endfor %}
+  <div style="height:300vh; background-color: blue;"> testo </div>
 </div>
+
 {% endblock %}
