@@ -4,8 +4,19 @@ $(document).ready(function(){
     $(".section_item").click(function(){
 
         var lesson_id   = $(this).attr('wrp_id');
-        $('.lesson_wrp').hide();
-        $('#'+lesson_id).slideDown();
+        var section_id  = $(this).attr('id');
+
+        $('.section_item_clr .fa').removeClass('fa-angle-up');
+        $('.section_item_clr .fa').addClass('fa-angle-down');
+        if($('#'+lesson_id).is(":visible")){
+            $('#'+lesson_id).slideUp();
+        }else{
+            $('#'+lesson_id).slideDown();
+            $('#'+section_id+' .section_item_clr .fa').addClass('fa-angle-up')
+            $('#'+section_id+' .section_item_clr .fa').removeClass('fa-angle-down');
+        }
+        
+        
 
     });
 

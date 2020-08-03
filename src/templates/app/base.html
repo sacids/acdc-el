@@ -99,13 +99,13 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
       </div>
     </div>
-
-
-
-
     
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    {% include "app/_sidebar_left.html" %} 
+    <div class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
+      <div data-scrollable>
+        {% block "sidebar_left" %}{% include "app/_sidebar_left.html" %}{% endblock %}
+      </div>
+    </div>
 
     <div class="sidebar right sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-skin-white" id="sidebar-library">
         <div data-scrollable id="scrollable">
