@@ -76,7 +76,7 @@
 
 {% block "sidebar_right" %}
 <div class="section_title">Course Content</div>
-<div class="sidebar-block list-group list-group-menu list-group-minimal">
+<div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal">
   {% for section in curriculum %}
     <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}" wrp_id="section_{{ section.id }}">
       <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>

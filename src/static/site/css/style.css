@@ -62,8 +62,8 @@ video{
     background-color: white;
     z-index: 10;
 }
-.sidebar-block{
-    top: 70px;
+.course_sections_wrp{
+    top: 60px;
     position: relative;
 }
 .section_item{
@@ -76,6 +76,7 @@ video{
     display: flex;
     flex-wrap: nowrap;
     cursor: pointer;
+    background-color: aliceblue;
 }
 .section_item_txt{
     width: 335px;
@@ -107,5 +108,19 @@ video{
 
 
 .active_item{
-    background-color: rgb(215, 240, 223);
+    background-color: rgba(215, 240, 223, 0.829);
+}
+
+
+
+
+/*
+My Course List
+*/
+
+.mcl_title_wrp{
+    font-size: 1.3em;
+    height: 60px;    
+    padding: 10px 16px;
+    color: #202020;
 }

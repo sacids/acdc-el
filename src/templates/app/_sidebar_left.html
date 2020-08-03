@@ -1,29 +1,30 @@
+
 <ul class="sidebar-menu sm-icons-right">
   <li><a href="app-student-dashboard.html"><i class="fa fa-bar-chart-o"></i><span>Dashboard</span></a></li>
   <li class="hasSubmenu active open">
     <a href="#course-menu"><i class="fa fa-mortar-board"></i><span>Courses</span></a>
     <ul id="course-menu" class="in">
-      <li><a href="app-directory-grid.html"><span>All Courses</span></a></li>
-      <li><a href="app-directory-list.html"><span>My Courses</span></a></li>
-      <li><a href="app-directory-list.html"><span>Starred</span></a></li>
-      <li><a href="app-student-course.html"><span>Wishlist</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>All Courses</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>My Courses</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Starred</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Wishlist</span></a></li>
     </ul>
   </li>
   <li class="hasSubmenu">
     <a href="#forum-menu"><i class="fa fa-file-text-o"></i><span>Forum</span></a>
     <ul id="forum-menu">
-      <li><a href="app-forum.html"><span>Home</span></a></li>
-      <li><a href="app-forum-category.html"><span>Category</span></a></li>
-      <li><a href="app-forum-thread.html"><span>Thread</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Home</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Category</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Thread</span></a></li>
     </ul>
   </li>
   <li class="hasSubmenu">
     <a href="#account-menu"><i class="fa fa-user"></i><span>Account</span></a>
     <ul id="account-menu">
-      <li><a href="app-student-profile.html"><span>Edit Profile</span></a></li>
-      <li><a href="app-student-billing.html"><span>Change Password</span></a></li>
+      <li><a href="{% url "profiles:edit_self" %}"><span>Edit Profile</span></a></li>
+      <li><a href="{% url "accounts:password-change" %}"><span>Change Password</span></a></li>
     </ul>
   </li>
   <li><a href="app-student-messages.html"><i class="fa fa-comments"></i><span>Messages</span></a></li>
-  <li><a href="login.html"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
+  <li><a href="{% url "accounts:logout" %}"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
 </ul>
