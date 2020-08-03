@@ -17,7 +17,7 @@
         {% if course_list %}
             <div class="row" data-toggle="isotope">
                 {% for course in course_list %}
-                <div class="item col-xs-12 col-sm-6 col-lg-4">
+                <div class="course_item col-xs-12 col-sm-6 col-lg-4" cat="{{ course.category.id }}">
                     <div class="panel panel-default paper-shadow" data-z="0.5">
 
                         <div class="panel-heading">
@@ -45,8 +45,8 @@
                             </a>
                         </div>
 
-                        <div class="panel-body">
-                                <h4 class="text-headline margin-v-0-10"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></h4>
+                        <div class="mcl_title_wrp panel-body">
+                                <span class="mcl_title margin-v-0-10"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></span>
                         </div>
                     </div>
                 </div>
@@ -75,4 +75,12 @@
 </div>
 {% endblock %}
 
-
+{% block "sidebar_right" %}
+<h4 class="category">Categories</h4>
+<ul class="mcl_category_wrp sidebar-block list-group list-group-menu list-group-minimal">
+  <li class="list-group-item active" cat_id="0"><a href="#"> All</a></li>
+  {% for category in categories %}
+        <li class="list-group-item" cat_id="{{ category.id }}"><a href="#"><span class="badge pull-right">40+</span> {{ category.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -36,4 +36,17 @@ $(document).ready(function(){
         $(this).addClass('active_item');
     });
 
+    $(".mcl_category_wrp .list-group-item").click(function(){
+
+        var cat_id      = $(this).attr('cat_id');
+        $('.mcl_category_wrp .list-group-item').removeClass('active');
+        $(this).addClass('active');
+        if(cat_id == 0){
+            $(".course_item").show();
+        }else{
+            $(".course_item").hide();
+            $(".course_item[cat="+cat_id+"]").show();
+        }
+    });
+
   });

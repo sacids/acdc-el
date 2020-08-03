@@ -18,6 +18,11 @@ class PathListView(generic.ListView):
         else:
             return "course_list.html"
 
+    def get_context_data(self, **kwargs):
+            context                     = super(PathListView, self).get_context_data(**kwargs)
+            context['categories']       = Category.objects.all()
+            return context
+
     def get_queryset(self, *args, **kwargs):
         if self.kwargs:
             return ElPath.objects.select_related('category').filter(category=self.kwargs['category_id']).order_by('-created_on')
