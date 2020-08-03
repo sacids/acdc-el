@@ -15,9 +15,6 @@ $(document).ready(function(){
             $('#'+section_id+' .section_item_clr .fa').addClass('fa-angle-up')
             $('#'+section_id+' .section_item_clr .fa').removeClass('fa-angle-down');
         }
-        
-        
-
     });
 
     $(".lesson_item").click(function(){
