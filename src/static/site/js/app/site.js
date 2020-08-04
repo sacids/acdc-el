@@ -1,5 +1,19 @@
-$(document).ready(function(){
+$(document).ready(function() {
+    
+    var video_src   = $('.les').attr('lesson_src');
+    $("#lesson_content_vid source").attr('src', video_src);
+    $("#lesson_content_vid").load();
 
+    var topPos     = $("#scrollable").scrollTop();
+    var divPos     = $('.les').offset().top - 125;
+    $("#scrollable").animate({ scrollTop: divPos+topPos });
+
+    $(".section_item, .lesson_item").removeClass('active_item');
+    $('.les').addClass('active_item');
+
+});
+
+$(document).ready(function(){
 
     $(".section_item").click(function(){
 
@@ -21,7 +35,17 @@ $(document).ready(function(){
         var video_src   = $(this).attr('lesson_src');
         $("#lesson_content_vid source").attr('src', video_src);
         $("#lesson_content_vid").load();
+
+        var url = $(location).attr('href').split("/").splice(0, 5).join("/");
+        var href        = $(this).attr("href");
+        window.history.pushState({href: href}, url, href);
+        //return false; //intercept the link
     });
+
+    window.addEventListener('popstate', function(e){
+        if(e.state)
+          openURL(e.state.href);
+    }); 
 
     $(".section_item, .lesson_item").click(function(){
 

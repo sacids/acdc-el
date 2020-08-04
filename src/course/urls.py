@@ -8,6 +8,7 @@ app_name = "course"
 urlpatterns = [
     path("list/", views.PathListView.as_view(), name="course_list"),
     path('<int:pk>-<slug:slug>', views.PathDetailView.as_view(), name='course_detail'),
+    path('<int:pk>-<slug:slug>/<int:lesson_id>', views.PathDetailView.as_view(), name='cl_detail'),
 
     #sections
     path('section/', views.SectionListView.as_view(),name='section_list'),

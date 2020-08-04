@@ -82,11 +82,11 @@
       <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>
       <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
     </div>
-    <div class="lesson_wrp" id="section_{{ section.id }}" style="display:none">
+    <div class="lesson_wrp" id="section_{{ section.id }}" {% if somo.section_id != section.id %}style="display:none"{% endif %}>
     {% for l in section.lesson.all %}
-      <div class="lesson_item" lesson_src="{{ l.content.url }}">
+      <div class="lesson_item {% if l.id == somo.id %}les{% endif %}" lesson_src="{{ l.content.url }}" href="{{ l.id }}">
         <div class="lesson_cb"><i class="far fa-square"></i></div>
-        <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }} </div>
+        <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }}</div>
       </div>
     {% endfor %}
     </div>
