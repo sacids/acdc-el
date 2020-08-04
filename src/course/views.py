@@ -53,8 +53,8 @@ class PathDetailView(generic.DetailView):
 
         if 'lesson_id' in self.kwargs:
             lesson_id               = self.kwargs['lesson_id']
+            context['somo']         = Lesson.objects.get(pk=lesson_id)
         
-        context['somo']             = Lesson.objects.get(pk=lesson_id)
         context['curriculum']       = Section.objects.filter(el_path_id=course_id).prefetch_related('lesson')
         context['featured']         = ElPath.objects.filter(featured=True)[:5]
         context['intakes']          = ElIntake.objects.filter(el_path_id=course_id).select_related('instructor')
