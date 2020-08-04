@@ -1,0 +1,84 @@
+{% extends 'web/base.html' %}
+{% load staticfiles %}
+
+{% block 'page-title' %} 
+  <div class="parallax bg-white page-section">
+    <div class="container parallax-layer" data-opacity="true">
+      <div class="media v-middle">
+        <div class="media-body">
+          <h1 class="text-display-2 margin-none">Library</h1>
+          <p class="text-light lead">Browse through thousands of lessons.</p>
+        </div>
+        <div class="media-right">
+          <div class="width-100 text-right">
+            <div class="btn-group">
+              <a class="btn btn-grey-900" href="website-directory-grid.html"><i class="fa fa-th"></i></a>
+              <a class="btn btn-white" href="website-directory-list.html"><i class="fa fa-list"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="page-section">
+            {% if course_list %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row" data-toggle="isotope">
+                        {% for course in course_list %}
+                        <div class="item col-xs-12 col-sm-6 col-lg-3">
+                            <div class="panel panel-default paper-shadow" data-z="0.5">
+                                <div class="cover overlay cover-image-full hover">
+                                    <span class="img icon-block height-150 bg-primary"></span>
+                                    <a href="{{ course.get_absolute_url }}" class="padding-none overlay overlay-full icon-block bg-primary">
+                                        <img src="{{course.photo.url}}" class="height-150"/>
+                                    </a>
+                                    <a href="{{ course.get_absolute_url }}" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                        <span class="v-center">
+                                            <span class="btn btn-circle btn-primary btn-lg"><i class="fa fa-graduation-cap"></i></span>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="panel-body">
+                                    <h4 class="text-headline margin-v-0-10"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></h4>
+                                    <p class="small margin-none">
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if is_paginated %}
+                    <ul class="pagination margin-top-none">
+                        {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo;</a></li>
+                        {% endif %}
+                        {% for l in  page_obj.paginator.page_range %}
+                            {% if l <= page_obj.number|add:2 and l >= page_obj.number|add:-2 %}
+                                <li class="{% if l == page_obj.number %}active{% endif %}"><a href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                    <br/>
+                </div>
+
+            </div>
+            {% else %}
+            There are no courses to show
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

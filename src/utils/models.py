@@ -47,10 +47,9 @@ class ElPath(models.Model):
 
 class ElIntake(models.Model):
     title = models.CharField(max_length=300)
-    slug = models.SlugField()
     el_path = models.ForeignKey(ElPath, on_delete=models.CASCADE)
     instructor = models.ForeignKey(
-        User, related_name='path_instructor', on_delete=models.PROTECT)
+        User, related_name='intake_instructor', on_delete=models.SET_DEFAULT, default=1)
     max_students = models.PositiveIntegerField(default=0)
     start_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     end_date = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -224,3 +223,59 @@ class Attachment(models.Model):
     class Meta:
         db_table = 'el_attachments'
         managed = False
+
+
+# Student Registration
+class StudentRegistration(models.Model):
+    el_path         = models.ForeignKey(ElPath, on_delete=models.CASCADE)
+    el_intake       = models.ForeignKey(ElIntake, on_delete=models.CASCADE)
+    student         = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)
+    status          = models.CharField(max_length=50,default='REGISTERED')
+    
+    def __str__(self):
+        return str(self.pk)+' '+str(self.el_intake_id)+' '+str(self.el_path_id)+' '+str(self.student_id) 
+
+    class Meta:
+        db_table    = 'el_student_registration'
+        managed     = True
+        unique_together = ('el_path', 'student')
+
+
+
+# Student Progress
+class StudentProgress(models.Model):
+    student         = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)
+    el_path         = models.ForeignKey(ElPath, on_delete=models.CASCADE)
+    el_lesson       = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    status          = models.CharField(max_length=50,default='ONGOING')
+    
+    def __str__(self):
+        return str(self.pk)+' '+str(self.el_path_id)+' '+str(self.el_lesson_id)+' '+str(self.student_id) 
+
+    class Meta:
+        db_table = 'el_student_progress'
+        managed = True
+
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver
+from django.conf import settings
+from django.forms.models import model_to_dict
+
+@receiver(user_logged_in)
+def sig_user_logged_in(sender, user, request, **kwargs):
+    #get models
+    request.session['reg_courses'] = {}
+    courses         = StudentRegistration.objects.filter(student_id=user.id)
+    for course in courses:
+        tmp     = {}
+        tmp[course.el_path_id]  = model_to_dict(course)
+        request.session['reg_courses'] = tmp
+
+    print(request.session['reg_courses'])
+    print("user logged in: %s at %s" % (user, request.META['REMOTE_ADDR']))
+
+@receiver(user_logged_out)
+def sig_user_logged_out(sender, user, request, **kwargs):
+    #get models
+    del request.session['reg_courses']
+    print('logged out')

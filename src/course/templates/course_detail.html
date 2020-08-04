@@ -203,6 +203,17 @@
             <div class="panel-body text-center">
               <p><a class="btn btn-success btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated href="website-take-course.html">Start Course</a></p>
             </div>
+            <div>
+              {% for intake in intakes %}
+              <form name="register_{{ intake.id }}" method="post" action="{{ request.build_absolute_uri }}">
+                  {% csrf_token %}
+                  <input type="hidden" name="path_id" value="{{ course.id }}"/>
+                  <input type="hidden" name="intake_id" value="{{ intake.id }}"/>
+                  <input type="submit" value="Register" />
+              </form>
+              <br>
+              {% endfor %}
+            </div>
             <ul class="list-group">
               <li class="list-group-item">
                 <a href="#" class="text-light"><i class="fa fa-facebook fa-fw"></i> Share on facebook</a>

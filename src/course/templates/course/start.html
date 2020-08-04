@@ -1,0 +1,97 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+
+{% block reg_course_title %}
+  <h1 class="text-display-1 margin-none">{{ course.title }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="lesson_content">
+  <video id="lesson_content_vid" controls autoplay>
+    <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</div>
+<div class="lesson_attr">
+    <!-- Tabs -->
+    <div class="course-tabs">
+      <div class="item"><a href="#home"><i class="fa fa-fw fa-home"></i>Overview</a></div>
+      <div class="item"><a href="#profile"><i class="fa fa-fw fa-user"></i>Q&A</a></div>
+      <div class="item"><a href="#messages"><i class="fa fa-fw fa-envelope"></i>Announcements</a></div>
+      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i>Resources</a></div>
+      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i>Notes</a></div>
+    </div>
+    <!-- // END Tabs -->
+
+    <!-- Panes -->
+    <div class="course-pane">
+        some itemms inside
+    </div>
+    <!-- // END Panes -->
+
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block "sidebar_left" %}
+<ul class="sidebar-menu sm-icons-right">
+  <li><a href="app-student-dashboard.html"><i class="fa fa-bar-chart-o"></i><span>Dashboard</span></a></li>
+  <li class="hasSubmenu active open">
+    <a href="#course-menu"><i class="fa fa-mortar-board"></i><span>Courses</span></a>
+    <ul id="course-menu" class="in">
+      <li><a href="{% url "course:course_list" %}"><span>All Courses</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>My Courses</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Starred</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Wishlist</span></a></li>
+    </ul>
+  </li>
+  <li class="hasSubmenu">
+    <a href="#forum-menu"><i class="fa fa-file-text-o"></i><span>Forum</span></a>
+    <ul id="forum-menu">
+      <li><a href="{% url "course:course_list" %}"><span>Home</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Category</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Thread</span></a></li>
+    </ul>
+  </li>
+  <li class="hasSubmenu">
+    <a href="#account-menu"><i class="fa fa-user"></i><span>Account</span></a>
+    <ul id="account-menu">
+      <li><a href="{% url "profiles:edit_self" %}"><span>Edit Profile</span></a></li>
+      <li><a href="{% url "accounts:password-change" %}"><span>Change Password</span></a></li>
+    </ul>
+  </li>
+  <li><a href="app-student-messages.html"><i class="fa fa-comments"></i><span>Messages</span></a></li>
+  <li><a href="{% url "accounts:logout" %}"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
+</ul>
+{% endblock %}
+
+
+
+
+{% block "sidebar_right" %}
+<div class="section_title">Course Content</div>
+<div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal">
+  {% for section in curriculum %}
+    <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}" wrp_id="section_{{ section.id }}">
+      <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>
+      <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
+    </div>
+    <div class="lesson_wrp" id="section_{{ section.id }}" style="display:none">
+    {% for l in section.lesson.all %}
+      <div class="lesson_item" lesson_src="{{ l.content.url }}">
+        <div class="lesson_cb"><i class="far fa-square"></i></div>
+        <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }} </div>
+      </div>
+    {% endfor %}
+    </div>
+  {% endfor %}
+  <div style="height:300vh; background-color: blue;"> testo </div>
+</div>
+
+{% endblock %}
