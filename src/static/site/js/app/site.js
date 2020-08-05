@@ -1,17 +1,25 @@
+
+
+$.fn.exists = function () {
+    return this.length !== 0;
+}
+
 $(document).ready(function() {
     
-    var video_src   = $('.les').attr('lesson_src');
-    $("#lesson_content_vid source").attr('src', video_src);
-    $("#lesson_content_vid").load();
+    if( $('.les').exists() ){
+        var video_src   = $('.les').attr('lesson_src');
+        $("#lesson_content_vid source").attr('src', video_src);
+        $("#lesson_content_vid").load();
 
-    var topPos     = $("#scrollable").scrollTop();
-    var divPos     = $('.les').offset().top - 125;
-    $("#scrollable").animate({ scrollTop: divPos+topPos });
+        var topPos     = $("#scrollable").scrollTop();
+        var divPos     = $('.les').offset().top - 125;
+        $("#scrollable").animate({ scrollTop: divPos+topPos });
 
-    $(".section_item, .lesson_item").removeClass('active_item');
-    $('.les').addClass('active_item');
-
+        $(".section_item, .lesson_item").removeClass('active_item');
+        $('.les').addClass('active_item');
+    }
 });
+
 
 $(document).ready(function(){
 
@@ -36,9 +44,9 @@ $(document).ready(function(){
         $("#lesson_content_vid source").attr('src', video_src);
         $("#lesson_content_vid").load();
 
-        var url = $(location).attr('href').split("/").splice(0, 5).join("/");
-        var href        = $(this).attr("href");
-        window.history.pushState({href: href}, url, href);
+        var href = window.location.origin+$('#c_url').val()+'/'+$(this).attr("href");
+        //alert(href)
+        window.history.pushState({href: href}, '', href);
         //return false; //intercept the link
     });
 

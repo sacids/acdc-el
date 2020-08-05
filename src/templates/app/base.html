@@ -83,8 +83,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </a>
                     <ul class="dropdown-menu" role="menu">
                     <li><a href="website-student-dashboard.html"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
-                    <li><a href="website-student-courses.html"><i class="fa fa-mortar-board"></i> My Courses</a></li>
-                    <li><a href="website-student-profile.html"><i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="{% url 'course:course_list' %}"><i class="fa fa-mortar-board"></i> My Courses</a></li>
+                    <li><a href="{% url 'profiles:show_self' %}"><i class="fa fa-user"></i> Profile</a></li>
                     <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
                     </ul>
                 </li>
