@@ -86,7 +86,7 @@ $(document).ready(function(){
         var base_url=window.location.origin;
 
         $.ajax({
-            url: base_url + "/api/resources/retrieve/el_path/2",
+            url: base_url + "/api/resources/retrieve/el_lessons/" + lesson_id,
             type: "GET",
             dataType: "json",
 
