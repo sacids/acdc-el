@@ -1,4 +1,28 @@
+
+
+$.fn.exists = function () {
+    return this.length !== 0;
+}
+
+$(document).ready(function() {
+    
+    if( $('.les').exists() ){
+        var video_src   = $('.les').attr('lesson_src');
+        $("#lesson_content_vid source").attr('src', video_src);
+        $("#lesson_content_vid").load();
+
+        var topPos     = $("#scrollable").scrollTop();
+        var divPos     = $('.les').offset().top - 125;
+        $("#scrollable").animate({ scrollTop: divPos+topPos });
+
+        $(".section_item, .lesson_item").removeClass('active_item');
+        $('.les').addClass('active_item');
+    }
+});
+
+
 $(document).ready(function(){
+
     $(".section_item").click(function(){
 
         var lesson_id   = $(this).attr('wrp_id');
@@ -20,12 +44,16 @@ $(document).ready(function(){
         $("#lesson_content_vid source").attr('src', video_src);
         $("#lesson_content_vid").load();
 
-        //lesson id
-        var lesson_id = $(this).attr('lesson_id');
-
-        //set variables here
-        $("#resources-tab").attr("ls-id", lesson_id);
+        var href = window.location.origin+$('#c_url').val()+'/'+$(this).attr("href");
+        //alert(href)
+        window.history.pushState({href: href}, '', href);
+        //return false; //intercept the link
     });
+
+    window.addEventListener('popstate', function(e){
+        if(e.state)
+          openURL(e.state.href);
+    }); 
 
     $(".section_item, .lesson_item").click(function(){
         var topPos     = $("#scrollable").scrollTop();

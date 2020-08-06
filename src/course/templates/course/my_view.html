@@ -1,0 +1,90 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block reg_course_title %}
+  <h1 class="text-display-1 margin-none">{{ course.title }}</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+  <img src="{{course.photo.url}}" style="width: 500px">
+  {{course.description}}
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block "sidebar_left" %}
+<ul class="sidebar-menu sm-icons-right">
+  <li><a href="app-student-dashboard.html"><i class="fa fa-bar-chart-o"></i><span>Dashboard</span></a></li>
+  <li class="hasSubmenu active open">
+    <a href="#course-menu"><i class="fa fa-mortar-board"></i><span>Courses</span></a>
+    <ul id="course-menu" class="in">
+      <li><a href="{% url "course:course_list" %}"><span>All Courses</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>My Courses</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Starred</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Wishlist</span></a></li>
+    </ul>
+  </li>
+  <li class="hasSubmenu">
+    <a href="#forum-menu"><i class="fa fa-file-text-o"></i><span>Forum</span></a>
+    <ul id="forum-menu">
+      <li><a href="{% url "course:course_list" %}"><span>Home</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Category</span></a></li>
+      <li><a href="{% url "course:course_list" %}"><span>Thread</span></a></li>
+    </ul>
+  </li>
+  <li class="hasSubmenu">
+    <a href="#account-menu"><i class="fa fa-user"></i><span>Account</span></a>
+    <ul id="account-menu">
+      <li><a href="{% url "profiles:edit_self" %}"><span>Edit Profile</span></a></li>
+      <li><a href="{% url "accounts:password-change" %}"><span>Change Password</span></a></li>
+    </ul>
+  </li>
+  <li><a href="app-student-messages.html"><i class="fa fa-comments"></i><span>Messages</span></a></li>
+  <li><a href="{% url "accounts:logout" %}"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
+</ul>
+{% endblock %}
+
+
+
+
+{% block "sidebar_right" %}
+
+<div> Intakes </div>
+<div>
+  {% for intake in intakes %}
+  <div>
+    <div> {{ intake.title }}</div>
+    <div> {{ intake.start_date }} - {{ intake.end_date }}</div>
+    <div> Instructor</div>
+    <div>
+      <img src="{% thumbnail intake.instructor.profile.picture|default:'default_profile.png' 30x30 crop %}" alt="" class="img-circle" /> 
+      {{ intake.instructor.get_full_name|truncatechars:20 }}
+    </div>
+    <div>
+      <form name="register_{{ intake.id }}" method="post" action="{{ request.build_absolute_uri }}">
+          {% csrf_token %}
+          <input type="hidden" name="path_id" value="{{ course.id }}"/>
+          <input type="hidden" name="intake_id" value="{{ intake.id }}"/>
+          <input type="submit" value="Register" />
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div> Other Courses </div>
+<div>
+  {% for path in featured %}
+    <div><a href="{{ path.get_absolute_url }}">{{ path.title }}</a></div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}

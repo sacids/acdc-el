@@ -14,9 +14,9 @@ class PathListView(generic.ListView):
 
     def get_template_names(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return "my_course_list.html"
+            return "course/my_list.html"
         else:
-            return "course_list.html"
+            return "course/list.html"
 
     def get_context_data(self, **kwargs):
             context                     = super(PathListView, self).get_context_data(**kwargs)
@@ -32,26 +32,60 @@ class PathListView(generic.ListView):
 class PathDetailView(generic.DetailView):
     model                   = ElPath
     context_object_name     = 'course'
-    template_name           = "course_detail.html"
+    #template_name           = "course_detail.html"
 
     def get_template_names(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return "my_course_detail.html"
+            course_id       = self.kwargs['pk']
+            if self.isRegisterdToCourse(course_id):
+                return "course/start.html"
+            else:
+                return "course/my_view.html"
         else:
-            return "course_detail.html"
+            return "course/view.html"
     
     def get_context_data(self, **kwargs):
-            course_id                   = self.kwargs['pk']
-            context                     = super(PathDetailView, self).get_context_data(**kwargs)
-            context['details']          = ElPath.objects.get(pk=course_id)
-            context['questions']        = Question.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
-            context['announcements']    = Announcement.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
-            context['resources']        = Resource.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
-            context['notes']            = Note.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
-            context['curriculum']       = Section.objects.filter(el_path_id=course_id).prefetch_related('lesson')
-            #context['featured_courses'] = ElPath.objects.filter(featured=True).prefetch_related('lesson_set')
 
-            return context
+        
+        context                     = super(PathDetailView, self).get_context_data(**kwargs)
+        course_id                   = self.kwargs['pk']
+        lesson_id                   = 0
+
+        if 'lesson_id' in self.kwargs:
+            lesson_id               = self.kwargs['lesson_id']
+            context['somo']         = Lesson.objects.get(pk=lesson_id)
+        
+        context['curriculum']       = Section.objects.filter(el_path_id=course_id).prefetch_related('lesson')
+        context['featured']         = ElPath.objects.filter(featured=True)[:5]
+        context['intakes']          = ElIntake.objects.filter(el_path_id=course_id).select_related('instructor')
+        return context
+
+    def isRegisterdToCourse(self,course_id):
+        if not self.request.session['reg_courses']:
+            return False
+        else:
+            if str(course_id) in self.request.session['reg_courses']:
+                return True
+            else:
+                return False
+
+    def post(self, request, *args, **kwargs):
+        el_intake           = ElIntake.objects.get(pk=request.POST.get("intake_id"))
+        el_path             = ElPath.objects.get(pk=request.POST.get("path_id"))
+        student             = request.user
+
+        Reg, created        = StudentRegistration.objects.get_or_create(el_intake=el_intake,el_path=el_path,student=student)
+
+        #save to session
+        tmp                 = {}
+        tmp[Reg.el_path_id] = model_to_dict(Reg)
+        request.session['reg_courses'] = tmp
+
+        # Write Your Logic here
+        self.object         = self.get_object()
+        context             = super(PathDetailView, self).get_context_data(**kwargs)
+        context['curriculum']       = Section.objects.filter(el_path_id=Reg.el_path_id).prefetch_related('lesson')
+        return render(request,"course/start.html",context)
 
 #section
 class SectionListView(generic.ListView):
