@@ -1,5 +1,5 @@
 from . import serializers
-from utils.models import Announcement, Feedback, Discussion, Note, Rating
+from utils.models import *
 from django.http import Http404
 from rest_framework import status
 from rest_framework import viewsets
@@ -7,7 +7,9 @@ from rest_framework.response import Response
 
 # Create your views here.
 
-#Announcements 
+# Announcements
+
+
 class Announcements(viewsets.ViewSet):
     """
     A simple ViewSet for listing  announcements.
@@ -19,17 +21,16 @@ class Announcements(viewsets.ViewSet):
             announcements, many=True)
         return Response(serializer.data)
 
-
     """
     A simple ViewSet for listing announcement based on table_name and table_id
     """
 
     def retrieve(self, request, table_name, table_id):
-        announcements = Announcement.objects.filter(table_name=table_name, table_id=table_id)
+        announcements = Announcement.objects.filter(
+            table_name=table_name, table_id=table_id)
         serializer = serializers.AnnouncementSerializer(
             announcements, many=True)
         return Response(serializer.data)
-
 
     """
     A simple ViewSet for storing announcement
@@ -43,7 +44,7 @@ class Announcements(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#Discussions
+# Discussions
 class Discussions(viewsets.ViewSet):
     """
     A simple ViewSet for listing  discussions.
@@ -78,7 +79,7 @@ class Discussions(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#Feedback
+# Feedback
 class Feedback(viewsets.ViewSet):
     """
     A simple ViewSet for listing  feedback.
@@ -112,7 +113,9 @@ class Feedback(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#Ratings
+# Ratings
+
+
 class Ratings(viewsets.ViewSet):
     """
     A simple ViewSet for listing  ratings.
@@ -147,7 +150,7 @@ class Ratings(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#Notes
+# Notes
 class Notes(viewsets.ViewSet):
     """
     A simple ViewSet for listing  notes.
@@ -175,9 +178,79 @@ class Notes(viewsets.ViewSet):
     """
 
     def create(self, request):
+        response_data = {}  # response
+
         serializer = serializers.NoteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            response_data['status'] = 'success'
+            return Response(response_data, status=status.HTTP_201_CREATED)
 
+        response_data['status'] = 'failed'
+        response_data['message'] = 'Failed to create note'
+        return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+
+# comments
+class Comments(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing comments.
+    """
+
+    def lists(self, request):
+        comments = Comment.objects.all()
+        serializer = serializers.CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+    """
+    A simple ViewSet for listing comments based on table_name and table_id
+    """
+
+    def retrieve(self, request, table_name, table_id):
+        comments = Comment.objects.filter(
+            table_name=table_name, table_id=table_id)
+        serializer = serializers.CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+    """
+    A simple ViewSet for storing comments
+    """
+
+    def create(self, request):
+        response_data = {}  # response
+
+        serializer = serializers.CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response_data['status'] = 'success'
+            return Response(response_data, status=status.HTTP_201_CREATED)
+
+        response_data['status'] = 'failed'
+        response_data['message'] = 'Failed to insert comment'
+        return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Response
+class Resources(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing resources.
+    """
+
+    def lists(self, request):
+        resourses = Resource.objects.all()
+        serializer = serializers.ResourceSerializer(resourses, many=True)
+        return Response(serializer.data)
+
+    """
+    Retrieve resources by table_name and table id
+    """
+
+    def retrieve(self, request, table_name, table_id):
+        response_data = {}  # response
+
+        resources = Resource.objects.filter(table_name=table_name, table_id=table_id)
+        serializer = serializers.ResourceSerializer(resources, many=True)
+
+        response_data['status'] = 'success'
+        response_data['resources'] = serializer.data
+        return Response(response_data)

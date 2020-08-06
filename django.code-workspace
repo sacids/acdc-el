@@ -1,6 +1,9 @@
 {
     "folders": [
         {
+            "path": "../../multics/opras"
+        },
+        {
             "path": "."
         }
     ],

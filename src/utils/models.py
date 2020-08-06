@@ -108,7 +108,6 @@ class Lesson(models.Model):
 # announcements
 class Announcement(models.Model):
     title = models.CharField(max_length=300)
-    slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     publish = models.BooleanField(default=True)
     sort_order = models.PositiveIntegerField(default=0)
@@ -130,7 +129,6 @@ class Announcement(models.Model):
 # feedback
 class Feedback(models.Model):
     title = models.CharField(max_length=300)
-    slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     publish = models.BooleanField(default=True)
     sort_order = models.PositiveIntegerField(default=0)
@@ -152,7 +150,6 @@ class Feedback(models.Model):
 # discussions
 class Discussion(models.Model):
     title = models.CharField(max_length=300)
-    slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     publish = models.BooleanField(default=True)
     sort_order = models.PositiveIntegerField(default=0)
@@ -192,9 +189,85 @@ class Rating(models.Model):
 
 # notes
 class Note(models.Model):
-    title = models.CharField(max_length=300)
-    slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
+    publish = models.BooleanField(default=True)
+    sort_order = models.PositiveIntegerField(default=0)
+
+    table_name = models.CharField(max_length=300, null=True)
+    table_id = models.PositiveIntegerField(default=0)
+
+    created_on = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by = models.ForeignKey(
+        User, on_delete=models.SET_DEFAULT, default=1)
+
+    def __str__(self):
+        return self.description if self.description else self.pk
+
+    class Meta:
+        db_table = 'el_notes'
+        managed = True
+
+
+# Attachment
+class Attachment(models.Model):
+    content = models.FileField(
+        upload_to='course/lessons/attachments', max_length=100)
+
+    table_name = models.CharField(max_length=300, null=True)
+    table_id = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        db_table = 'el_attachments'
+        managed = False
+
+
+# comments
+class Comment(models.Model):
+    description = models.TextField(blank=True, null=True)
+    publish = models.BooleanField(default=True)
+    table_name = models.CharField(max_length=300, null=True)
+    table_id = models.PositiveIntegerField(default=0)
+
+    created_on = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by = models.ForeignKey(
+        User, on_delete=models.SET_DEFAULT, default=1)
+
+    def __str__(self):
+        return self.description if self.description else self.pk
+
+    class Meta:
+        db_table = 'el_comments'
+        managed = True    
+
+
+#resources
+class Resource(models.Model):
+    title = models.CharField(max_length=300)
+    description = models.TextField(blank=True, null=True)
+    publish = models.BooleanField(default=True)
+    attachment = models.FileField(
+        upload_to='course/resources/attachments', max_length=100, null=True)
+    sort_order = models.PositiveIntegerField(default=0)
+
+    table_name = models.CharField(max_length=300, null=True)
+    table_id = models.PositiveIntegerField(default=0)
+
+    created_on = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by = models.ForeignKey(
+        User, on_delete=models.SET_DEFAULT, default=1)
+
+    def __str__(self):
+        return self.title if self.title else self.pk
+
+    class Meta:
+        db_table = 'el_resources'
+        managed = True
+
+
+#questions
+class Question(models.Model):
+    title = models.TextField(blank=True, null=True)
+    answers = models.TextField(blank=True, null=True)
     publish = models.BooleanField(default=True)
     sort_order = models.PositiveIntegerField(default=0)
 
@@ -209,18 +282,5 @@ class Note(models.Model):
         return self.title if self.title else self.pk
 
     class Meta:
-        db_table = 'el_notes'
+        db_table = 'el_questions'
         managed = True
-
-
-# Attachment
-class Attachment(models.Model):
-    content = models.FileField(
-        upload_to='course/lessons/attachmnts', max_length=100)
-
-    table_name = models.CharField(max_length=300, null=True)
-    table_id = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        db_table = 'el_attachments'
-        managed = False

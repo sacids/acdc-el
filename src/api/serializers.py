@@ -33,3 +33,15 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Note
         fields = '__all__'
+
+
+class ResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Resource
+        fields = '__all__'
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Comment
+        fields = '__all__'

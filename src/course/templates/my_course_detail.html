@@ -2,34 +2,250 @@
 {% load staticfiles %}
 
 {% block reg_course_title %}
-  <h1 class="text-display-1 margin-none">{{ course.title }}</h1>
+<h1 class="text-display-1 margin-none">{{ course.title }}</h1>
 {% endblock %}
 
 {% block content %}
+
 <div class="lesson_content">
   <video id="lesson_content_vid" controls autoplay>
     <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 </div>
+
 <div class="lesson_attr">
-    <!-- Tabs -->
-    <div class="course-tabs">
-      <div class="item"><a href="#home"><i class="fa fa-fw fa-home"></i>Overview</a></div>
-      <div class="item"><a href="#profile"><i class="fa fa-fw fa-user"></i>Q&A</a></div>
-      <div class="item"><a href="#messages"><i class="fa fa-fw fa-envelope"></i>Announcements</a></div>
-      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i>Resources</a></div>
-      <div class="item"><a href="#settings"><i class="fa fa-fw fa-cog"></i>Notes</a></div>
+  <!--./tabs -->
+  <div class="course-tabs">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+          aria-controls="overview" aria-selected="true"><i class="fa fa-fw fa-home"></i> Overview</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="qn-tab" data-toggle="tab" href="#qn" role="tab" aria-selected="true"><i
+            class="fa fa-fw fa-question"></i> Q&A</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="announcements-tab" data-toggle="tab" href="#announcements" role="tab"
+          aria-selected="false"><i class="fa fa-fw fa-newspaper-o"></i> Announcements</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" ls-id="ls-id" role="tab" aria-selected="false"><i
+            class="fa fa-fw fa-folder-open-o"></i> Resources</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-selected="false"><i
+            class="fa fa-fw fa-book"></i> Notes</a>
+      </li>
+    </ul>
+  </div><!-- ./course-tab -->
+  <!--./tab-lists -->
+
+
+  <div class="tab-content">
+    <div class="tab-pane fade active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info padding">
+            <h3>About this course</h3>
+            <span>{{ details.byline}}</span>
+            <hr />
+
+            <h5>Details</h5>
+            <p>Students : </p>
+            <p>Lectures: </p>
+            <p>Language : English</p>
+            <hr />
+
+            <h5>Description</h5>
+            <p>{{ details.description }}</p>
+            <hr />
+            <h5>Instructor</h5>
+            <p></p>
+
+          </div>
+          <!--./info -->
+        </div>
+        <!--./col-md-12 -->
+      </div>
+      <!--./row -->
     </div>
-    <!-- // END Tabs -->
+    <!--./overview -->
 
-    <!-- Panes -->
-    <div class="course-pane">
-        some itemms inside
+    <div class="tab-pane fade" id="qn" role="tabpanel" aria-labelledby="qn-tab">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info padding">
+
+            <div class="row" style="padding-top: 10px;">
+              <div class="col-md-6">
+                <b>no. of questions questions in this course</b>
+              </div>
+
+              <div class="col-md-6">
+                <div class="pull-right">
+                  <a class="" data-toggle="modal" data-target="#exampleModal">Ask a new
+                    question</a>
+                </div>
+              </div>
+            </div><!-- ./row-->
+            <hr />
+
+            <ul class="">
+              {% for val in questions %}
+              <li class="">
+                <div class="media v-middle">
+                  <div class="media-body text-body-2">
+                    <h5>{{val.title }}</h5>
+                    <p class="posted">Posted on {{ val.created_on}} </p>
+                    <p>{{ val.answers }}</p>
+                    <!--./row -->
+                  </div><!-- ./media-body -->
+                </div><!-- ./ media -->
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <!--./info -->
+        </div>
+        <!--./col-md-12 -->
+      </div>
+      <!--./row -->
     </div>
-    <!-- // END Panes -->
+    <!--./qn -->
 
+    <div class="tab-pane fade" id="announcements" role="tabpanel" aria-labelledby="announcements-tab">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info padding">
 
+            <ul class="">
+              {% for val in announcements %}
+              <li class="">
+                <div class="media v-middle">
+                  <div class="media-body text-body-2">
+                    <h5>{{val.title }}</h5>
+                    <p class="posted">Posted on {{ val.created_on}} </p>
+                    <p>{{ val.description }}</p>
+
+                    <form id="comment-form" class="ac_form" autocomplete="off">
+                      {% csrf_token %}
+                      <input type="hidden" name="ann_id" id="ann_id" value="{{ val.id }}" />
+
+                      <div class="row">
+                        <div class="col-md-12 col-12">
+                          <div class="input-group">
+                            <input type="text" name="comments" id="comments" class="form-control"
+                              placeholder="Write comments here ..." />
+                            <span class="input-group-btn">
+                              <button type="submit" name="submit-comment-form" class="btn btn-primary btn-block">
+                                <i class="fa fa-play"></i></button>
+                            </span>
+                          </div>
+                          <!--./form-group -->
+                        </div>
+                        <!--./col-lg-2 -->
+                      </div>
+                      <!--./row -->
+                    </form>
+                    <!--./form -->
+                  </div><!-- ./media-body -->
+                </div><!-- ./ media -->
+              </li>
+              {% endfor %}
+            </ul>
+
+          </div>
+          <!--./info -->
+        </div>
+        <!--./col-md-12 -->
+      </div>
+      <!--./row -->
+    </div>
+    <!--./announcements -->
+
+    <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info padding">
+            <div id="results"></div> <!--./ results-->
+          </div>
+          <!--./info -->
+        </div>
+        <!--./col-md-12 -->
+      </div>
+      <!--./row -->
+    </div>
+    <!--./resources -->
+
+    <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info padding">
+
+            <form id="form-note" autocomplete="off">
+              {% csrf_token %}
+              <input type="hidden" name="el_path" id="el_path" value="{{ val.id }}" />
+
+              <div class="row">
+                <div class="col-md-12 col-12">
+                  <div class="form-group">
+                    <textarea name="note" id="note" class="form-control" rows="3"
+                      placeholder="Write note..."></textarea>
+                  </div>
+                  <!--./form-group -->
+                </div>
+                <!--./col-lg-2 -->
+              </div>
+              <!--./row -->
+
+              <div class="row">
+                <div class="col-md-12 col-12">
+                  <div class="pull-right">
+                    <div class="form-group">
+                      <button type="submit" id="submit-note" class="btn btn-primary btn-sm">Save</button>
+                      <a href="#" class="btn btn-danger btn-sm">Cancel</a>
+                    </div>
+                    <!--./form-group -->
+                  </div>
+                  <!--./pull-right-->
+                </div>
+                <!--./col-lg-2 -->
+              </div>
+              <!--./row -->
+            </form>
+
+            <hr />
+            <ul class="">
+              {% for val in notes %}
+              <li class="">
+                <div class="media v-middle">
+                  <div class="media-body text-body-2">
+                    <h5>{{val.title }}</h5>
+                    <p class="posted">Posted on {{ val.created_on}} </p>
+                    <p>{{ val.description }}</p>
+                    <!--./row -->
+                  </div><!-- ./media-body -->
+                </div><!-- ./ media -->
+              </li>
+              {% endfor %}
+            </ul>
+
+          </div>
+          <!--./info -->
+        </div>
+        <!--./col-md-12 -->
+      </div>
+      <!--./row -->
+    </div>
+    <!--./notes -->
+  </div>
+  <!--./tab-content -->
 </div>
 {% endblock %}
 
@@ -66,24 +282,23 @@
 {% endblock %}
 
 
-
-
 {% block "sidebar_right" %}
 <div class="section_title">Course Content</div>
 <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal">
   {% for section in curriculum %}
-    <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}" wrp_id="section_{{ section.id }}">
-      <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>
-      <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
-    </div>
-    <div class="lesson_wrp" id="section_{{ section.id }}" style="display:none">
+  <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}"
+    wrp_id="section_{{ section.id }}">
+    <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>
+    <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
+  </div>
+  <div class="lesson_wrp" id="section_{{ section.id }}" style="display:none">
     {% for l in section.lesson.all %}
-      <div class="lesson_item" lesson_src="{{ l.content.url }}">
-        <div class="lesson_cb"><i class="far fa-square"></i></div>
-        <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }} </div>
-      </div>
-    {% endfor %}
+    <div class="lesson_item" lesson_src="{{ l.content.url }}" lesson_id = "{{l.id}}">
+      <div class="lesson_cb"><i class="far fa-square"></i></div>
+      <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }} </div>
     </div>
+    {% endfor %}
+  </div>
   {% endfor %}
   <div style="height:300vh; background-color: blue;"> testo </div>
 </div>

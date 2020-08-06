@@ -43,16 +43,20 @@ class PathDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
             course_id                   = self.kwargs['pk']
             context                     = super(PathDetailView, self).get_context_data(**kwargs)
+            context['details']          = ElPath.objects.get(pk=course_id)
+            context['questions']        = Question.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
+            context['announcements']    = Announcement.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
+            context['resources']        = Resource.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
+            context['notes']            = Note.objects.filter(table_name="el_path", table_id=course_id).order_by('-created_on')
             context['curriculum']       = Section.objects.filter(el_path_id=course_id).prefetch_related('lesson')
             #context['featured_courses'] = ElPath.objects.filter(featured=True).prefetch_related('lesson_set')
 
             return context
 
-
 #section
 class SectionListView(generic.ListView):
     model           = Section
-    template_name = "sections/lists.html"
+    template_name   = "sections/lists.html"
 
     def get_queryset(self, *args, **kwargs):
         if self.kwargs:

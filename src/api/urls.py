@@ -30,10 +30,17 @@ urlpatterns = [
     path('ratings/create',
          views.Ratings.as_view({'post': 'create'})),
 
+    # resources
+    path('resources/retrieve/<str:table_name>/<str:table_id>',
+         views.Resources.as_view({'get': 'retrieve'})),
+
     # notes
     path('notes', views.Notes.as_view({'get': 'lists'})),
     path('notes/retrieve/<str:table_name>/<str:table_id>',
          views.Notes.as_view({'get': 'retrieve'})),
     path('notes/create',
          views.Notes.as_view({'post': 'create'})),
+
+    # comment
+    path('comments/create', views.Comments.as_view({'post': 'create'}))
 ]

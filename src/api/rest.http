@@ -1,15 +1,4 @@
 
-GET http://127.0.0.1:8000/api/announcements/retrieve/el_lessons/2 HTTP/1.1
 
-
-POST http://127.0.0.1:8000/api/announcements/create HTTP/1.1
+GET http://127.0.0.1:8000/api/resources/retrieve/el_path/2 HTTP/1.1
 content-type: application/json
-
-{
-    "title": "Academind is now an official school + further resources",
-    "slug": "academind-is-now-an-official",
-    "description": "I hope you're doing fine and progressing towards your goals!",
-    "sort_order": 3,
-    "table_name": "el_learning_path",
-    "table_id": 1 
-}

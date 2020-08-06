@@ -1,72 +1,126 @@
 
-.mix-blend{
+
+
+.mix-blend {
     color: white;
     mix-blend-mode: difference;
 }
 
-.show-sidebar.sidebar-r3 #content{
+.show-sidebar.sidebar-r3 #content {
     margin-right: 355px;
 }
 
-.sidebar-size-3{
+.sidebar-size-3 {
     width: 355px;
 }
 
-.lesson_content{
-
+.lesson_content {
     height: 62vh;
     width: 100%;
     background-color: black;
 }
-video{
+
+video {
     height: 100%;
     width: auto;
     display: block;
     margin: 0 auto;
 }
 
-
-
-.lesson_attr{
+.lesson_attr {
     padding: 0px 15px;
 }
-.course-tabs{
+
+.course-tabs {
     display: flex;
     flex-wrap: nowrap;
     border-bottom: 1px solid rgb(179, 170, 170);
-    
 }
-.course-tabs .item{
-    padding: 12px;
+
+.course-tabs ul li.nav-item {
+    font-size: 1.2em;
+    font-weight: 500;
+    padding-top: 10px;
+    border-bottom: 4px solid transparent;
+}
+
+.course-tabs ul li.nav-item i {
     font-size: 1.2em;
     border-bottom: 4px solid transparent;
 }
-.course-tabs .item:hover{
+
+.course-tabs ul li.nav-item:hover {
     border-bottom: 4px solid rgb(22, 105, 126);
 }
 
-.course-pane{
-    height: 80vh;
+.tab-content {
+    min-height: 80vh;
+    height: auto;
     padding: 10px 0px;
 }
 
-.section_title{
+.tab-content .padding {
+    padding: 0 40px;
+}
+
+.tab-content {
+    font-size: 14px;
+}
+
+.tab-content .info h3 {
+    font-weight: 600;
+    font-size: 26px;
+    color: #383636;
+}
+
+.tab-content .info span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #383636;
+}
+
+.tab-content .info p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #383636;
+}
+
+.tab-content .info h5 {
+    font-weight: 600;
+    font-size: 16px;
+    color: #383636;
+}
+
+.tab-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tab-content ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.section_title {
     border-bottom: 1px solid #ccc;
     padding: 20px 10px;
     font-size: 1.2em;
     font-weight: 500;
     color: #383636;
-
     position: fixed;
     width: 100%;
     background-color: white;
     z-index: 10;
 }
-.course_sections_wrp{
+
+.course_sections_wrp {
     top: 60px;
     position: relative;
 }
-.section_item{
+
+.section_item {
     border-bottom: 1px solid rgb(236, 235, 235);
     padding: 10px;
     font-size: 1.25em;
@@ -78,49 +132,52 @@ video{
     cursor: pointer;
     background-color: aliceblue;
 }
-.section_item_txt{
+
+.section_item_txt {
     width: 335px;
 }
-.section_item_clr{
+
+.section_item_clr {
     width: 20px;
 }
-.lesson_item{
+
+.lesson_item {
     display: flex;
     flex-wrap: nowrap;
     cursor: pointer;
     height: 50px;
     font-size: 1.1em;
 }
-.lesson_item:hover, .section_item:hover{
+
+.lesson_item:hover, .section_item:hover {
     background-color: rgba(161, 159, 159, 0.178);
 }
-.lesson_item:last-child{
+
+.lesson_item:last-child {
     border-bottom: 1px solid #ccc;
 }
-.lesson_cb{
+
+.lesson_cb {
     width: 25px;
     padding: 10px 0px 10px 10px;
 }
-.lesson_txt{
-    width:330px;
+
+.lesson_txt {
+    width: 330px;
     padding: 10px 10px 10px 10px;
 }
 
-
-.active_item{
+.active_item {
     background-color: rgba(215, 240, 223, 0.829);
 }
-
-
-
 
 /*
 My Course List
 */
 
-.mcl_title_wrp{
+.mcl_title_wrp {
     font-size: 1.3em;
-    height: 60px;    
+    height: 60px;
     padding: 10px 16px;
     color: #202020;
 }
