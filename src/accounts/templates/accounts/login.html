@@ -1,18 +1,48 @@
-{% extends "accounts/auth_base.html" %}
+{% extends "web/base_in.html" %}
+
+{% load staticfiles %}
+{% block css %}
+<link href="{% static 'web/css/booking-sign_up.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% load crispy_forms_tags %}
 
-{% block title %}{{ block.super }}Log In{% endblock %}
+{% block content %}
 
-{% block form_heading %}Please Log In{% endblock %}
+<div class="container margin_60_40">
+  <div class="row justify-content-center">
+    <div class="col-lg-4">
+      <div class="sign_up">
+        <div class="head">
+          <div class="title">
+            <h3>Sign In</h3>
+          </div>
+        </div>
+        <!-- /head -->
+        <div class="main">
+          <a href="#0" class="social_bt facebook">Sign in with Facebook</a>
+          <a href="#0" class="social_bt google">Sign in with Google</a>
+          <div class="divider"><span>Or</span></div>
 
-{% block form %}
-  {% crispy form %}
+          {% block form %}
+          {% crispy form %}
 
-  <div class="form-message">
-    <p>
-      Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>.
-    </p>
+          <div class="form-message">
+            <p>
+              Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>.
+            </p>
+          </div>
+          {% endblock form %}
+
+        </div>
+      </div>
+      <!-- /box_booking -->
+    </div>
+    <!-- /col -->
+
   </div>
-{% endblock form %}
+  <!-- /row -->
+</div>
+<!-- /container -->
 
+{% endblock %}

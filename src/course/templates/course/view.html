@@ -1,74 +1,88 @@
-{% extends 'web/base.html' %}
-{% load staticfiles %}
+{% extends "web/base_in.html" %}
 
-{% block reg_course_title %}
-  <h1 class="text-display-1 margin-none">{{ course.title }}</h1>
+{% load staticfiles %}
+{% block css %}
+<link href="{% static 'web/css/detail-page.css' %}" rel="stylesheet">
 {% endblock %}
+
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-</div>
-{% endblock %}
+<div class="container margin_detail">
+  <div class="row">
+    <div class="col-lg-8">
 
+      <div class="detail_page_head clearfix">
+        <div class="breadcrumbs">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li>{{ course.title }}</li>
+          </ul>
+        </div>
 
-
-
-
-
-
-{% block "sidebar_left" %}
-<ul class="sidebar-menu sm-icons-right">
-  <li><a href="app-student-dashboard.html"><i class="fa fa-bar-chart-o"></i><span>Dashboard</span></a></li>
-  <li class="hasSubmenu active open">
-    <a href="#course-menu"><i class="fa fa-mortar-board"></i><span>Courses</span></a>
-    <ul id="course-menu" class="in">
-      <li><a href="{% url "course:course_list" %}"><span>All Courses</span></a></li>
-      <li><a href="{% url "course:course_list" %}"><span>My Courses</span></a></li>
-      <li><a href="{% url "course:course_list" %}"><span>Starred</span></a></li>
-      <li><a href="{% url "course:course_list" %}"><span>Wishlist</span></a></li>
-    </ul>
-  </li>
-  <li class="hasSubmenu">
-    <a href="#forum-menu"><i class="fa fa-file-text-o"></i><span>Forum</span></a>
-    <ul id="forum-menu">
-      <li><a href="{% url "course:course_list" %}"><span>Home</span></a></li>
-      <li><a href="{% url "course:course_list" %}"><span>Category</span></a></li>
-      <li><a href="{% url "course:course_list" %}"><span>Thread</span></a></li>
-    </ul>
-  </li>
-  <li class="hasSubmenu">
-    <a href="#account-menu"><i class="fa fa-user"></i><span>Account</span></a>
-    <ul id="account-menu">
-      <li><a href="{% url "profiles:edit_self" %}"><span>Edit Profile</span></a></li>
-      <li><a href="{% url "accounts:password-change" %}"><span>Change Password</span></a></li>
-    </ul>
-  </li>
-  <li><a href="app-student-messages.html"><i class="fa fa-comments"></i><span>Messages</span></a></li>
-  <li><a href="{% url "accounts:logout" %}"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
-</ul>
-{% endblock %}
-
-
-
-
-{% block "sidebar_right" %}
-<div class="section_title">Course Content</div>
-<div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal">
-  {% for section in curriculum %}
-    <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}" wrp_id="section_{{ section.id }}">
-      <div class="section_item_txt">Section {{forloop.counter}} : {{ section.title|truncatechars:60 }}</div>
-      <div class="section_item_clr">{% if section.lesson.all %}<i class="fa fa-angle-down"></i>{% endif %}</div>
-    </div>
-    <div class="lesson_wrp" id="section_{{ section.id }}" style="display:none">
-    {% for l in section.lesson.all %}
-      <div class="lesson_item" lesson_src="{{ l.content.url }}">
-        <div class="lesson_cb"><i class="far fa-square"></i></div>
-        <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }} </div>
+        <div class="title">
+          <h1>{{ course.title }}</h1>
+          <h6>{{ course.byline }}</h4>
+            <ul class="tags">
+              <li><a href="#0">{{ course.category.title }}</a></li>
+            </ul>
+        </div>
+        <div class="rating">
+          <div class="score"><strong>8.9</strong></div>
+        </div>
       </div>
-    {% endfor %}
+      <!-- /detail_page_head -->
+
+      <ul class="share-buttons">
+        <li><a class="fb-share" href="#0"><i class="social_facebook"></i> Share</a></li>
+        <li><a class="twitter-share" href="#0"><i class="social_twitter"></i> Share</a></li>
+        <li><a class="gplus-share" href="#0"><i class="social_googleplus"></i> Share</a></li>
+      </ul>
+      <hr />
+      <h4>Description</h4>
+      {{ course.description }}
+
+      <div class="other_info">
+        <h4>What you'll learn?</h2>
+          <div class="row">
+            <div class="col-md-12">
+
+            </div>
+            <!--./col-md-12-->
+          </div>
+          <!--./row-->
+          <!-- /row -->
+      </div>
     </div>
-  {% endfor %}
-  <div style="height:300vh; background-color: blue;"> testo </div>
+    <!-- /col -->
+
+    <div class="col-lg-4" id="sidebar_fixed">
+      <div class="box_booking">
+        <!-- /head -->
+        <div class="main">
+          <h6>This course includes:</h6>
+          <p><i class="fa fa-play"></i> 24 hours on-demand video</p>
+          <p><i class="fa fa-cloud-download"></i> 1 downloadable resources</p>
+          <p><i class="fa fa-question"></i> 2 quizzes</p>
+          <p><i class="fa fa-clock-o"></i> Full time access</p>
+          <p><i class="fa fa-certificate"></i> Certificate of completion</p>
+
+
+
+          <div class="mt_4"></div>
+          <a href="#0" class="btn_1 full-width mb_5">Take Course</a>
+          <a href="#" class="btn_1 full-width outline wishlist">
+            <i class="icon_heart"></i> Add to wishlist</a>
+        </div>
+      </div>
+     
+    </div>
+
+  </div>
+  <!-- /row -->
 </div>
+<!-- /container -->
 
 {% endblock %}

@@ -17,7 +17,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(accounts.urls)),
     path("web/", views.Web.as_view(), name="Web"),
-    path("course/", include(course.urls)),
+    path("courses/", include(course.urls)),
 
     #api
     path('api/', include('api.urls'))

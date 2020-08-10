@@ -44,9 +44,7 @@ class PathDetailView(generic.DetailView):
         else:
             return "course/view.html"
     
-    def get_context_data(self, **kwargs):
-
-        
+    def get_context_data(self, **kwargs):      
         context                     = super(PathDetailView, self).get_context_data(**kwargs)
         course_id                   = self.kwargs['pk']
         lesson_id                   = 0
@@ -57,6 +55,7 @@ class PathDetailView(generic.DetailView):
         
         context['curriculum']       = Section.objects.filter(el_path_id=course_id).prefetch_related('lesson')
         context['featured']         = ElPath.objects.filter(featured=True)[:5]
+        context['course']           = ElPath.objects.select_related('category').get(pk=course_id)
         context['intakes']          = ElIntake.objects.filter(el_path_id=course_id).select_related('instructor')
         return context
 

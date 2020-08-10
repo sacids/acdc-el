@@ -17,15 +17,15 @@ class LoginForm(AuthenticationForm):
         self.fields["username"].widget.input_type = "email"  # ugly hack
 
         self.helper.layout = Layout(
-            Field("username", placeholder="Enter Email", autofocus=""),
-            Field("password", placeholder="Enter Password"),
+            Field("username", placeholder="Enter Email",autofocus="", css_class="form-control"),
+            Field("password", placeholder="Enter Password",css_class="form-control"),
             HTML(
                 '<a href="{}">Forgot Password?</a>'.format(
                     reverse("accounts:password-reset")
                 )
             ),
             Field("remember_me"),
-            Submit("sign_in", "Log in", css_class="btn btn-lg btn-primary btn-block"),
+            Submit("sign_in", "Sign In", css_class="btn_1 full-width mb_5"),
         )
 
 
@@ -36,11 +36,11 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["email"].widget.input_type = "email"  # ugly hack
 
         self.helper.layout = Layout(
-            Field("email", placeholder="Enter Email", autofocus=""),
-            Field("name", placeholder="Enter Full Name"),
-            Field("password1", placeholder="Enter Password"),
-            Field("password2", placeholder="Re-enter Password"),
-            Submit("sign_up", "Sign up", css_class="btn-warning"),
+            Field("email", placeholder="Enter Email", autofocus="", css_class="form-control"),
+            Field("name", placeholder="Enter Full Name", css_class="form-control"),
+            Field("password1", placeholder="Enter Password", css_class="form-control"),
+            Field("password2", placeholder="Re-enter Password", css_class="form-control"),
+            Submit("sign_up", "Sign up Now", css_class="btn_1 full-width mb_5"),
         )
 
 
