@@ -2,9 +2,6 @@
     "folders": [
         {
             "path": "."
-        },
-        {
-            "path": "../poe-1.3"
         }
     ],
     "settings": {

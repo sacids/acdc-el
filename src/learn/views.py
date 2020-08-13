@@ -7,7 +7,8 @@ class HomePage(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePage, self).get_context_data(**kwargs)
-        context['courses'] = ElPath.objects.select_related('category').all().order_by('-created_on')
+        context['featured'] = ElPath.objects.filter(featured=True)[:5]
+        context['courses']  = ElPath.objects.select_related('category').all().order_by('-created_on')
         return context
 
 
