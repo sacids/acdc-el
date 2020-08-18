@@ -1,6 +1,9 @@
 {% extends "web/base_in.html" %}
 
 {% load staticfiles %}
+{% load thumbnail %}
+
+
 {% block css %}
 <link href="{% static 'web/css/detail-page.css' %}" rel="stylesheet">
 {% endblock %}
@@ -75,6 +78,29 @@
           <a href="#0" class="btn_1 full-width mb_5">Take Course</a>
           <a href="#" class="btn_1 full-width outline wishlist">
             <i class="icon_heart"></i> Add to wishlist</a>
+        </div>
+
+        <div> Intakes </div>
+        <div>
+          {% for intake in intakes %}
+          <div>
+            <div> {{ intake.title }}</div>
+            <div> {{ intake.start_date }} - {{ intake.end_date }}</div>
+            <div> Instructor</div>
+            <div>
+              <img src="{% thumbnail intake.instructor.profile.picture|default:'default_profile.png' 30x30 crop %}" alt="" class="img-circle" /> 
+              {{ intake.instructor.get_full_name|truncatechars:20 }}
+            </div>
+            <div>
+              <form name="register_{{ intake.id }}" method="post" action="{{ request.build_absolute_uri }}">
+                  {% csrf_token %}
+                  <input type="hidden" name="path_id" value="{{ course.id }}"/>
+                  <input type="hidden" name="intake_id" value="{{ intake.id }}"/>
+                  <input type="submit" value="Register" />
+              </form>
+            </div>
+          </div>
+          {% endfor %}
         </div>
       </div>
      
