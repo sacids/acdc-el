@@ -36,7 +36,7 @@ ul.intakes li .title {
     font-weight: 600;
 }
 
-/* video display */
+/* ppage-video */
 
 .page-video {
     background-color: #121921;
@@ -44,30 +44,35 @@ ul.intakes li .title {
     width: 100%;
 }
 
+/*lesson-content*/
+
 .lesson_content {
-    background-color: #121921;
     width: 100%;
-    height: 540px;
-    padding: 10px 0;
 }
 
 video {
     height: 100%;
-    width: auto;
+    width: 100%;
     display: block;
-    margin: 0 auto;
-}
-
-.lesson_attr {
-    padding: 0px 15px;
 }
 
 /*Sidebar class */
 
 .side-nav {
-    height: 540px;
+    width: 100%;
     overflow-y: scroll;
     position: relative;
+}
+
+.side-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.side-nav {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .section_title {
@@ -78,7 +83,6 @@ video {
     font-weight: 600;
     color: #ffffff;
     width: 100%;
-    background-color: inherit;
 }
 
 .course_sections_wrp {
@@ -115,16 +119,13 @@ video {
     display: flex;
     flex-wrap: nowrap;
     cursor: pointer;
+    color: #ffffff;
     height: 50px;
     font-size: 1.1em;
 }
 
-.lesson_item:hover, .section_item:hover {
-    background-color: rgba(161, 159, 159, 0.178);
-}
-
 .lesson_item:last-child {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #424242;
 }
 
 .lesson_cb {
@@ -135,10 +136,6 @@ video {
 .lesson_txt {
     width: 330px;
     padding: 10px 10px 10px 10px;
-}
-
-.active_item {
-    background-color: rgba(215, 240, 223, 0.829);
 }
 
 /*Info class */
