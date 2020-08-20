@@ -39,7 +39,7 @@ class PathDetailView(generic.DetailView):
         if self.request.user.is_authenticated:
             course_id       = self.kwargs['pk']
             if self.isRegisterdToCourse(course_id):
-                return "course/start.html"
+                return "course/learn.html"
             else:
                 return "course/view.html"
         else:
@@ -57,7 +57,9 @@ class PathDetailView(generic.DetailView):
         context['curriculum']       = Section.objects.filter(el_path_id=course_id).prefetch_related('lesson')
         context['featured']         = ElPath.objects.filter(featured=True)[:5]
         context['course']           = ElPath.objects.select_related('category').get(pk=course_id)
+        context['reg_students']     = StudentRegistration.objects.filter(el_path_id=course_id)
         context['intakes']          = ElIntake.objects.filter(el_path_id=course_id).select_related('instructor')
+        context['announcements']    = Announcement.objects.filter(table_name="el_path", table_id=course_id)
         context['title']            = "Course details"
         return context
 

@@ -35,3 +35,142 @@ ul.intakes li {
 ul.intakes li .title {
     font-weight: 600;
 }
+
+/* video display */
+
+.page-video {
+    background-color: #121921;
+    height: 540px;
+    width: 100%;
+}
+
+.lesson_content {
+    background-color: #121921;
+    width: 100%;
+    height: 540px;
+    padding: 10px 0;
+}
+
+video {
+    height: 100%;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.lesson_attr {
+    padding: 0px 15px;
+}
+
+/*Sidebar class */
+
+.side-nav {
+    height: 540px;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.section_title {
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    width: 100%;
+    background-color: inherit;
+}
+
+.course_sections_wrp {
+    top: 10px;
+    height: 480px !important;
+}
+
+.section_item {
+    padding: 20px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: pointer;
+    background-color: inherit;
+    border-bottom: 1px solid #424242;
+}
+
+.section_item_txt {
+    width: 100%;
+}
+
+.section_item_clr {
+    float: right;
+}
+
+.section_item_clr i {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.lesson_item {
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: pointer;
+    height: 50px;
+    font-size: 1.1em;
+}
+
+.lesson_item:hover, .section_item:hover {
+    background-color: rgba(161, 159, 159, 0.178);
+}
+
+.lesson_item:last-child {
+    border-bottom: 1px solid #ccc;
+}
+
+.lesson_cb {
+    width: 25px;
+    padding: 10px 0px 10px 10px;
+}
+
+.lesson_txt {
+    width: 330px;
+    padding: 10px 10px 10px 10px;
+}
+
+.active_item {
+    background-color: rgba(215, 240, 223, 0.829);
+}
+
+/*Info class */
+
+.info b {
+    font-size: 20px !important;
+    font-weight: 600;
+}
+
+.info p span {
+    display: block;
+}
+
+.info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.info ul li {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/*tab-details */
+
+.tabs_detail {
+    border-bottom: 1px solid rgb(179, 170, 170);
+}
+
+.tabs_detail ul li.nav-item {
+    font-weight: 600;
+    padding: 10px;
+}
