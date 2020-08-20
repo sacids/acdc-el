@@ -1,3 +1,173 @@
 /*============================================================================================*/
+
 /* Your custom styles below */
+
 /*============================================================================================*/
+
+.pt-1 {
+    padding-top: 4px;
+}
+
+.pt-2 {
+    padding-top: 8px;
+}
+
+.pt-3 {
+    padding-top: 16px;
+}
+
+.pt-4 {
+    padding-top: 24px;
+}
+
+/*intakes ul*/
+
+ul.intakes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.intakes li {
+    padding: 0;
+}
+
+ul.intakes li .title {
+    font-weight: 600;
+}
+
+/* ppage-video */
+
+.page-video {
+    background-color: #121921;
+    height: 540px;
+    width: 100%;
+}
+
+/*lesson-content*/
+
+.lesson_content {
+    width: 100%;
+}
+
+video {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+/*Sidebar class */
+
+.side-nav {
+    width: 100%;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.side-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.side-nav {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.section_title {
+    border-bottom: 1px solid #424242;
+    text-align: left;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    width: 100%;
+}
+
+.course_sections_wrp {
+    top: 10px;
+    height: 480px !important;
+}
+
+.section_item {
+    padding: 20px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: pointer;
+    background-color: inherit;
+    border-bottom: 1px solid #424242;
+}
+
+.section_item_txt {
+    width: 100%;
+}
+
+.section_item_clr {
+    float: right;
+}
+
+.section_item_clr i {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.lesson_item {
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: pointer;
+    color: #ffffff;
+    height: 50px;
+    font-size: 1.1em;
+}
+
+.lesson_item:last-child {
+    border-bottom: 1px solid #424242;
+}
+
+.lesson_cb {
+    width: 25px;
+    padding: 10px 0px 10px 10px;
+}
+
+.lesson_txt {
+    width: 330px;
+    padding: 10px 10px 10px 10px;
+}
+
+/*Info class */
+
+.info b {
+    font-size: 20px !important;
+    font-weight: 600;
+}
+
+.info p span {
+    display: block;
+}
+
+.info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.info ul li {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/*tab-details */
+
+.tabs_detail {
+    border-bottom: 1px solid rgb(179, 170, 170);
+}
+
+.tabs_detail ul li.nav-item {
+    font-weight: 600;
+    padding: 10px;
+}

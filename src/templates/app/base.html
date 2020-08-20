@@ -12,10 +12,10 @@
   <title>Learning</title>
 
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
-    <link href="{% static 'site/css/vendor/all.css' %}" rel="stylesheet">
-    <link href="{% static 'site/css/app/app.css' %}" rel="stylesheet">
-    <link href="{% static 'site/css/style.css' %}" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+  <link href="{% static 'site/css/vendor/all.css' %}" rel="stylesheet">
+  <link href="{% static 'site/css/app/app.css' %}" rel="stylesheet">
+  <link href="{% static 'site/css/style.css' %}" rel="stylesheet">
 
 
 
@@ -38,7 +38,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a href="#sidebar-menu" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i class="fa fa-ellipsis-v"></i></a>
+          <a href="#sidebar-menu" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i
+              class="fa fa-ellipsis-v"></i></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -47,19 +48,19 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
           </button>
           <div class="navbar-brand   navbar-brand-logo navbar-nav-padding-left">
             <a class="svg" href="app-student-dashboard.html">
-              ACDC-EL
+              <img src="{% static 'web/img/logo-dark.png' %}" width="140" height="35" alt="">
             </a>
           </div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="main-nav">
-        
+
           <div class="nav navbar-nav panel-heading">
             {% block reg_course_title %}{% endblock %}
           </div>
 
           <ul class="nav navbar-nav">
-            
+
           </ul>
           <ul class="nav navbar-nav navbar-nav-bordered navbar-right">
             <!-- notifications -->
@@ -70,25 +71,26 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </a>
               <ul class="dropdown-menu" role="notification">
                 <li class="dropdown-header">Notifications</li>
-                
+
               </ul>
             </li>
             <!-- // END notifications -->
             <!-- User -->
             {% if user.is_authenticated %}
-                <!-- user -->
-                <li class="dropdown user">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{% thumbnail user.profile.picture|default:'default_profile.png' 30x30 crop %}" alt="" class="img-circle" /> {{ user.get_full_name|truncatechars:20 }}<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                    <li><a href="website-student-dashboard.html"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
-                    <li><a href="{% url 'course:course_list' %}"><i class="fa fa-mortar-board"></i> My Courses</a></li>
-                    <li><a href="{% url 'profiles:show_self' %}"><i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
-                    </ul>
-                </li>
-                <!-- // END user -->
+            <!-- user -->
+            <li class="dropdown user">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="{% thumbnail user.profile.picture|default:'default_profile.png' 30x30 crop %}" alt=""
+                  class="img-circle" /> {{ user.get_full_name|truncatechars:20 }}<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="website-student-dashboard.html"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
+                <li><a href="{% url 'course:course_list' %}"><i class="fa fa-mortar-board"></i> My Courses</a></li>
+                <li><a href="{% url 'profiles:show_self' %}"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
+              </ul>
+            </li>
+            <!-- // END user -->
             {% endif %}
 
 
@@ -99,18 +101,21 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
       </div>
     </div>
-    
+
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    <div class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
+    <div
+      class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark"
+      id="sidebar-menu" data-type="collapse">
       <div data-scrollable>
         {% block "sidebar_left" %}{% include "app/_sidebar_left.html" %}{% endblock %}
       </div>
     </div>
 
-    <div class="sidebar right sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-skin-white" id="sidebar-library">
-        <div data-scrollable id="scrollable">
-          {% block "sidebar_right" %}{% include "app/_sidebar_right.html" %}{% endblock %}
-        </div>
+    <div class="sidebar right sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-skin-white"
+      id="sidebar-library">
+      <div data-scrollable id="scrollable">
+        {% block "sidebar_right" %}{% include "app/_sidebar_right.html" %}{% endblock %}
+      </div>
     </div>
 
     <!-- sidebar effects OUTSIDE of st-pusher: -->
@@ -127,7 +132,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         <!-- extra div for emulating position:fixed of the menu -->
         <div class="st-content-inner padding-none">
- 
+
           {% block content %}{% endblock %}
 
         </div>
@@ -150,7 +155,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
   <!-- Inline Script for colors and config objects; used by various external scripts; -->
   <script>
-    var colors = {
+    var colors={
       "danger-color": "#e74c3c",
       "success-color": "#81b53e",
       "warning-color": "#f0ad4e",
@@ -163,7 +168,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
       "lightred-color": "#e15258",
       "body-bg": "#f6f6f6"
     };
-    var config = {
+    var config={
       theme: "html",
       skins: {
         "default": {
@@ -173,7 +178,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     };
   </script>
 
- 
+
   <script src="{% static 'site/js/vendor/all.js' %}"></script>
   <script src="{% static 'site/js/app/app.js' %}"></script>
   <script src="{% static 'site/js/app/site.js' %}"></script>

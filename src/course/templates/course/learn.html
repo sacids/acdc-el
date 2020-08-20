@@ -1,0 +1,361 @@
+{% extends "web/base_in.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block css %}
+<link href="{% static 'web/css/detail-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="page-video">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-9">
+                <div class="lesson_content">
+                    <video id="lesson_content_vid" controls autoplay>
+                        <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+                <!--./lesson-content-->
+            </div><!-- ./col-->
+
+            <div class="col-lg-3 col-md-3">
+                <div class="side-nav">
+                    <div class="section_title">Course Content</div>
+
+                    <input type="hidden" id="c_url" value="{{ course.get_absolute_url }}" />
+                    <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal">
+                        {% for section in curriculum %}
+                        <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}"
+                            wrp_id="section_{{ section.id }}">
+                            <div class="section_item_txt">Section {{forloop.counter}} :
+                                {{ section.title|truncatechars:60 }}</div>
+                            <div class="section_item_clr">{% if section.lesson.all %}
+                                <i class="fa fa-angle-down"></i>{% endif %}
+                            </div>
+                        </div>
+                        <!--./list group-->
+                        <div class="lesson_wrp" id="section_{{ section.id }}"
+                            {% if somo.section_id != section.id %}style="display:none" {% endif %}>
+                            {% for l in section.lesson.all %}
+                            <div class="lesson_item {% if l.id == somo.id %}les{% endif %}"
+                                lesson_src="{{ l.content.url }}" href="{{ l.id }}">
+                                <div class="lesson_cb"><i class="fa fa-square"></i></div>
+                                <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }}</div>
+                            </div>
+                            <!--./lesson item-->
+                            {% endfor %}
+                        </div>
+                        <!--./lesson wrp-->
+                        {% endfor %}
+                    </div>
+                    <!--./course-sections-->
+                </div>
+                <!--./side-nav-->
+            </div><!-- ./col-->
+        </div>
+        <!--./row -->
+
+    </div>
+    <!--./container-fluid-->
+</div>
+<!--./page-video-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs_detail">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a id="overview-tab" href="#overview" class="nav-link active" data-toggle="tab" role="tab">
+                            <i class="fa fa-fw fa-home"></i> About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="qn-tab" data-toggle="tab" href="#qn" role="tab" aria-selected="true">
+                            <i class="fa fa-fw fa-question"></i> Q&A</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="announcements-tab" data-toggle="tab" href="#announcements" role="tab"
+                            aria-selected="false"><i class="fa fa-fw fa-newspaper-o"></i> Announcements</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" ls-id="ls-id"
+                            role="tab" aria-selected="false"><i class="fa fa-fw fa-folder-open-o"></i> Resources</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab"
+                            aria-selected="false"><i class="fa fa-fw fa-book"></i> Notes</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" role="tablist">
+                    <div id="overview" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
+                        <div class="card-header" role="tab" id="heading-A">
+                            <h5>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-A" aria-expanded="true"
+                                    aria-controls="collapse-A">
+                                    Information
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-A" class="collapse" role="tabpanel" aria-labelledby="heading-A">
+                            <div class="card-body info_content">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9">
+                                        <h2 class="text-left">Goal of the course</h2>
+                                        <p>{{ course.goal }}</p>
+
+                                        <h2 class="text-left">What you will learn</h2>
+                                        <p>{{ course.what_you_learn }}</p>
+
+                                        <h2 class="text-left">Description</h2>
+                                        <p>{{ course.description }}</p>
+                                    </div>
+                                    <!--./col--->
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="row info">
+                                            <div class="col-md-6">
+                                                <p><b>{{ reg_students.count }}</b> <span>Students</span></p>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p><b>English</b> <span>Language</span></p>
+                                            </div>
+                                        </div>
+                                        <!--./info-->
+                                        <hr />
+                                    </div>
+                                    <!--./col--->
+                                </div>
+                                <!--./row-->
+                            </div>
+                            <!--./card-body-->
+                        </div>
+                    </div>
+                    <!-- /tab -->
+
+                    <div id="qn" class="card tab-pane fade" role="tabpanel" aria-labelledby="qn-tab">
+                        <div class="card-header" role="tab" id="heading-B">
+                            <h5>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-C" aria-expanded="false"
+                                    aria-controls="collapse-B">
+                                    Questions and Answers
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="qn" class="collapse" role="tabpanel" aria-labelledby="heading-B">
+                            <div class="card-body reviews">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="info padding">
+
+                                            <div class="row" style="padding-top: 10px;">
+                                                <div class="col-md-6">
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="pull-right">
+                                                        <a class="" data-toggle="modal" data-target="#exampleModal">Ask
+                                                            a new
+                                                            question</a>
+                                                    </div>
+                                                </div>
+                                            </div><!-- ./row-->
+                                            <hr />
+
+                                            <ul class="">
+                                                {% for val in questions %}
+                                                <li class="">
+                                                    <div class="media v-middle">
+                                                        <div class="media-body text-body-2">
+                                                            <h5>{{val.title }}</h5>
+                                                            <p class="posted">Posted on {{ val.created_on}} </p>
+                                                            <p>{{ val.answers }}</p>
+                                                            <!--./row -->
+                                                        </div><!-- ./media-body -->
+                                                    </div><!-- ./ media -->
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <!--./info -->
+                                    </div>
+                                    <!--./col-md-12 -->
+                                </div>
+                                <!--./row -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab -->
+
+                    <div id="announcements" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
+                        <div class="card-header" role="tab" id="heading-C">
+                            <h5>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-C" aria-expanded="true"
+                                    aria-controls="collapse-C">
+                                    Announcements
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-C" class="collapse" role="tabpanel" aria-labelledby="heading-C">
+                            <div class="card-body info_content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="info padding">
+                                            <ul class="">
+                                                {% for val in announcements %}
+                                                <li class="">
+                                                    <div class="media v-middle">
+                                                        <div class="media-body text-body-2">
+                                                            <h5>{{val.title }}</h5>
+                                                            <p class="posted">Posted on {{ val.created_on}} </p>
+                                                            <p>{{ val.description }}</p>
+                                                        </div><!-- ./media-body -->
+                                                    </div><!-- ./ media -->
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+
+                                        </div>
+                                        <!--./info -->
+                                    </div>
+                                    <!--./col-md-12 -->
+                                </div>
+                                <!--./row -->
+                            </div>
+                            <!--./card-body-->
+                        </div>
+                    </div>
+                    <!-- /tab -->
+
+
+                    <div id="resources" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-D">
+                        <div class="card-header" role="tab" id="heading-D">
+                            <h5>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-D" aria-expanded="true"
+                                    aria-controls="collapse-D">
+                                    Resources
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-D" class="collapse" role="tabpanel" aria-labelledby="heading-D">
+                            <div class="card-body info_content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="info padding">
+                                            <div id="results"></div>
+                                            <!--./ results-->
+                                        </div>
+                                        <!--./info -->
+                                    </div>
+                                    <!--./col-md-12 -->
+                                </div>
+                                <!--./row -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab -->
+
+                    <div id="notes" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-E">
+                        <div class="card-header" role="tab" id="heading-E">
+                            <h5>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-E" aria-expanded="true"
+                                    aria-controls="collapse-E">
+                                    Notes
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-E" class="collapse" role="tabpanel" aria-labelledby="heading-E">
+                            <div class="card-body info_content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="info padding">
+
+                                            <form id="form-note" autocomplete="off">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="el_path" id="el_path" value="{{ val.id }}" />
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-12">
+                                                        <div class="form-group">
+                                                            <textarea name="note" id="note" class="form-control"
+                                                                rows="3" placeholder="Write note..."></textarea>
+                                                        </div>
+                                                        <!--./form-group -->
+                                                    </div>
+                                                    <!--./col-lg-2 -->
+                                                </div>
+                                                <!--./row -->
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-12">
+                                                        <div class="pull-right">
+                                                            <div class="form-group">
+                                                                <button type="submit" id="submit-note"
+                                                                    class="btn_1">Save</button>
+                                                            </div>
+                                                            <!--./form-group -->
+                                                        </div>
+                                                        <!--./pull-right-->
+                                                    </div>
+                                                    <!--./col-lg-2 -->
+                                                </div>
+                                                <!--./row -->
+                                            </form>
+
+                                            <hr />
+                                            <ul class="">
+                                                {% for val in notes %}
+                                                <li class="">
+                                                    <div class="media v-middle">
+                                                        <div class="media-body text-body-2">
+                                                            <h5>{{val.title }}</h5>
+                                                            <p class="posted">Posted on {{ val.created_on}} </p>
+                                                            <p>{{ val.description }}</p>
+                                                            <!--./row -->
+                                                        </div><!-- ./media-body -->
+                                                    </div><!-- ./ media -->
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+
+                                        </div>
+                                        <!--./info -->
+                                    </div>
+                                    <!--./col-md-12 -->
+                                </div>
+                                <!--./row -->
+                            </div>
+                            <!--./card-body-->
+                        </div>
+                    </div>
+                    <!-- /tab -->
+
+
+                </div>
+                <!-- /tab-content -->
+            </div>
+            <!-- /tabs_detail -->
+        </div>
+        <!--./col-->
+    </div>
+    <!-- /row -->
+</div>
+<!-- /container -->
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'site/js/app/site.js' %}"></script>
+{% endblock %}
