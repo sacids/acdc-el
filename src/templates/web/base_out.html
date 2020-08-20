@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>{% block title %}{% include "_brandname.html" %} :: {% endblock %}</title>
+    <title>{% block title %}{% include "_brandname.html" %} :: {{ title }}{% endblock %}</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -44,13 +44,39 @@
         <div class="container">
             <div id="logo">
                 <a href="/">
-                    <img src="{% static 'web/img/africacdclogo.png' %}" width="140" height="35" alt="" class="logo_normal">
-                    <img src="{% static 'web/img/africacdclogo.png' %}" width="140" height="35" alt="" class="logo_sticky">
+                    <img src="{% static 'web/img/logo-white.png' %}" width="140" height="35" alt="" class="logo_normal">
+                    <img src="{% static 'web/img/logo-dark.png' %}" width="140" height="35" alt="" class="logo_sticky">
                 </a>
             </div>
-            <ul id="top_menu">
+            
+            <ul id="top_menu" class="drop_user">
+                {% if user.is_authenticated %}
+                <li>
+                    <div class="dropdown user clearfix">
+                        <a href="#" data-toggle="dropdown">
+                            <figure><img src="img/avatar1.jpg" alt=""></figure>
+                            {{ user.get_full_name|truncatechars:15 }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-content">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
+                                    <li><a href="{% url 'course:course_list' %}"><i class="fa fa-mortar-board"></i> My Courses</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'profiles:show_self' %}"><i class="fa fa-user"></i> My Profile</a></li>
+                                    <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /dropdown -->
+                </li>
+                {% else %}
                 <li><a href="/login" class="login">Sign In</a></li>
+                {% endif %}
             </ul>
+            <!-- /top_menu -->
             <!-- /top_menu -->
             <a href="#0" class="open_close">
                 <i class="icon_menu"></i><span>Menu</span>
@@ -61,14 +87,14 @@
                         <i class="icon_close"></i><span>Menu</span>
                     </a>
                     <a href="">
-                        <img src="{% static 'web/img/logo.svg' %}" width="140" height="35" alt="">
+                        <img src="{% static 'web/img/logo-white.png' %}" width="140" height="35" alt="">
                     </a>
                 </div>
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/courses">Courses</a></li>
                     <li><a href="/about">About E-Learning</a></li>
-                    <li><a href="/about">Contact us</a></li>
+                    <li><a href="/contact">Contact us</a></li>
                 </ul>
             </nav>
         </div>

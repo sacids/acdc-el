@@ -9,18 +9,19 @@ from django.contrib.auth.models import User
 class PathListView(generic.ListView):
     model                   = ElPath
     context_object_name     = 'course_list'
-    #template_name           = "course_list.html"
+    template_name           = "course/list.html"
     paginate_by             = 8
 
-    def get_template_names(self, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return "course/my_list.html"
-        else:
-            return "course/list.html"
+    # def get_template_names(self, *args, **kwargs):
+    #     if self.request.user.is_authenticated:
+    #         return "course/my_list.html"
+    #     else:
+    #         return "course/list.html"
 
     def get_context_data(self, **kwargs):
             context                     = super(PathListView, self).get_context_data(**kwargs)
             context['categories']       = Category.objects.all()
+            context['title']            = "Courses"
             return context
 
     def get_queryset(self, *args, **kwargs):
@@ -40,7 +41,7 @@ class PathDetailView(generic.DetailView):
             if self.isRegisterdToCourse(course_id):
                 return "course/start.html"
             else:
-                return "course/my_view.html"
+                return "course/view.html"
         else:
             return "course/view.html"
     
@@ -57,6 +58,7 @@ class PathDetailView(generic.DetailView):
         context['featured']         = ElPath.objects.filter(featured=True)[:5]
         context['course']           = ElPath.objects.select_related('category').get(pk=course_id)
         context['intakes']          = ElIntake.objects.filter(el_path_id=course_id).select_related('instructor')
+        context['title']            = "Course details"
         return context
 
     def isRegisterdToCourse(self,course_id):

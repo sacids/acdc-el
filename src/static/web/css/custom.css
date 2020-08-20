@@ -1,3 +1,37 @@
 /*============================================================================================*/
+
 /* Your custom styles below */
+
 /*============================================================================================*/
+
+.pt-1 {
+    padding-top: 4px;
+}
+
+.pt-2 {
+    padding-top: 8px;
+}
+
+.pt-3 {
+    padding-top: 16px;
+}
+
+.pt-4 {
+    padding-top: 24px;
+}
+
+/*intakes ul*/
+
+ul.intakes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.intakes li {
+    padding: 0;
+}
+
+ul.intakes li .title {
+    font-weight: 600;
+}

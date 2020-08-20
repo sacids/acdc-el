@@ -27,6 +27,10 @@ class ElPath(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=300)
     byline = models.CharField(max_length=300)
+    goal           = models.TextField(blank=True, null=True)
+    what_you_learn = models.TextField(blank=True, null=True)
+    requirements   = models.TextField(blank=True, null=True)
+    target_students   = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     photo = models.ImageField(upload_to='course/photos')
     featured = models.BooleanField(default=True)
@@ -185,6 +189,20 @@ class Rating(models.Model):
         db_table = 'el_ratings'
         managed = True
 
+
+#reviews
+class Review(models.Model):
+    title           = models.CharField(max_length=300)
+    description     = models.TextField(blank=True, null=True)
+    publish         = models.BooleanField(default=True)
+    sort_order      = models.PositiveIntegerField(default=0)
+    el_path         = models.ForeignKey(ElPath, on_delete=models.CASCADE, related_name='review')
+    created_on      = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by      = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)
+
+    class Meta:
+        db_table = 'el_reviews'
+        managed = True
 
 # notes
 class Note(models.Model):
