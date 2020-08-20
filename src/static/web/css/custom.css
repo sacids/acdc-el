@@ -71,10 +71,10 @@ video {
 }
 
 .section_title {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #424242;
     text-align: left;
-    padding: 10px;
-    font-size: 18px;
+    padding: 10px 0;
+    font-size: 20px;
     font-weight: 600;
     color: #ffffff;
     width: 100%;
