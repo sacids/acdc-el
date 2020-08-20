@@ -5,64 +5,54 @@
 
 {% block css %}
 <link href="{% static 'web/css/detail-page.css' %}" rel="stylesheet">
+<link href="{% static 'site/css/learn.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-<div class="page-video">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-9 col-md-9">
-                <div class="lesson_content">
-                    <video id="lesson_content_vid" controls autoplay>
-                        <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
-                <!--./lesson-content-->
-            </div><!-- ./col-->
-
-            <div class="col-lg-3 col-md-3">
-                <div class="side-nav">
-                    <div class="section_title">Course Content</div>
-
-                    <input type="hidden" id="c_url" value="{{ course.get_absolute_url }}" />
-                    <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal">
-                        {% for section in curriculum %}
-                        <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}"
-                            wrp_id="section_{{ section.id }}">
-                            <div class="section_item_txt">Section {{forloop.counter}} :
-                                {{ section.title|truncatechars:60 }}</div>
-                            <div class="section_item_clr">{% if section.lesson.all %}
-                                <i class="fa fa-angle-down"></i>{% endif %}
-                            </div>
-                        </div>
-                        <!--./list group-->
-                        <div class="lesson_wrp" id="section_{{ section.id }}"
-                            {% if somo.section_id != section.id %}style="display:none" {% endif %}>
-                            {% for l in section.lesson.all %}
-                            <div class="lesson_item {% if l.id == somo.id %}les{% endif %}"
-                                lesson_src="{{ l.content.url }}" href="{{ l.id }}">
-                                <div class="lesson_cb"><i class="fa fa-square"></i></div>
-                                <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }}</div>
-                            </div>
-                            <!--./lesson item-->
-                            {% endfor %}
-                        </div>
-                        <!--./lesson wrp-->
-                        {% endfor %}
-                    </div>
-                    <!--./course-sections-->
-                </div>
-                <!--./side-nav-->
-            </div><!-- ./col-->
+<div class="page-video d-flex flex-row">
+    <div class="course_content_wrp">
+        <div class="lesson_content">
+            <video id="lesson_content_vid" controls autoplay>
+                <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
         </div>
-        <!--./row -->
+        <!--./lesson-content-->
+    </div><!-- ./course_content_wrp-->
 
-    </div>
-    <!--./container-fluid-->
+    <div class="course_curriulmn_wrp" >
+        <input type="hidden" id="c_url" value="{{ course.get_absolute_url }}" />
+        <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal"  id="scrollable">
+            {% for section in curriculum %}
+            <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}"
+                wrp_id="section_{{ section.id }}">
+                <div class="section_item_txt">Section {{forloop.counter}} :
+                    {{ section.title|truncatechars:60 }}</div>
+                <div class="section_item_clr">{% if section.lesson.all %}
+                    <i class="fa fa-angle-down"></i>{% endif %}
+                </div>
+            </div>
+            <!--./list group-->
+            <div class="lesson_wrp" id="section_{{ section.id }}"
+                {% if somo.section_id != section.id %}style="display:none" {% endif %}>
+                {% for l in section.lesson.all %}
+                <div class="lesson_item {% if l.id == somo.id %}les{% endif %}"
+                    lesson_src="{{ l.content.url }}" href="{{ l.id }}">
+                    <div class="lesson_cb"><i class="fa fa-square"></i></div>
+                    <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }}</div>
+                </div>
+                <!--./lesson item-->
+                {% endfor %}
+            </div>
+            <!--./lesson wrp-->
+            {% endfor %}
+        <div style="height:400px"> testo </div>
+        </div>
+        <!--./course-sections-->
+    </div><!-- ./course_sections_wrp-->
 </div>
 <!--./page-video-->
 

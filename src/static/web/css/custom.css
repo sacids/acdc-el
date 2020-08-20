@@ -40,7 +40,7 @@ ul.intakes li .title {
 
 .page-video {
     background-color: #121921;
-    height: 540px;
+    height: calc(100vh - 140px);
     width: 100%;
 }
 
@@ -48,6 +48,7 @@ ul.intakes li .title {
 
 .lesson_content {
     width: 100%;
+    height: 100%;
 }
 
 video {
@@ -85,22 +86,7 @@ video {
     width: 100%;
 }
 
-.course_sections_wrp {
-    top: 10px;
-    height: 480px !important;
-}
 
-.section_item {
-    padding: 20px 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    display: flex;
-    flex-wrap: nowrap;
-    cursor: pointer;
-    background-color: inherit;
-    border-bottom: 1px solid #424242;
-}
 
 .section_item_txt {
     width: 100%;
@@ -115,14 +101,6 @@ video {
     font-size: 18px;
 }
 
-.lesson_item {
-    display: flex;
-    flex-wrap: nowrap;
-    cursor: pointer;
-    color: #ffffff;
-    height: 50px;
-    font-size: 1.1em;
-}
 
 .lesson_item:last-child {
     border-bottom: 1px solid #424242;
@@ -133,10 +111,6 @@ video {
     padding: 10px 0px 10px 10px;
 }
 
-.lesson_txt {
-    width: 330px;
-    padding: 10px 10px 10px 10px;
-}
 
 /*Info class */
 

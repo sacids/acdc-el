@@ -1,0 +1,77 @@
+
+.course_content_wrp{
+    width: calc(100vw - 350px);
+    height: 100%;
+}
+
+.course_curriulmn_wrp{
+    width: 350px;
+    height: 100%;
+}
+
+.course_sections_wrp {
+    height:100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.section_item {
+    border-bottom: 1px solid #424242;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 500;
+    height: 70px;
+    color: #eeeaea;
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: pointer;
+}
+
+.section_item_txt {
+    width: 335px;
+}
+
+.section_item_clr {
+    width: 20px;
+}
+
+.lesson_item {
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding-left:10px;
+}
+
+.lesson_item:hover, .section_item:hover {
+    background-color: rgba(161, 159, 159, 0.178);
+}
+
+.lesson_item:last-child {
+    border-bottom: 1px solid #ccc;
+}
+
+.lesson_cb {
+    width: 25px;
+    padding: 10px 0px 10px 10px;
+}
+
+.lesson_txt {
+    padding: 10px;
+    color: #eeeaea;
+}
+
+.active_item {
+    background-color: #1b2531;
+}
+
+/*
+My Course List
+*/
+
+.mcl_title_wrp {
+    font-size: 1.3em;
+    height: 60px;
+    padding: 10px 16px;
+    color: #202020;
+}
