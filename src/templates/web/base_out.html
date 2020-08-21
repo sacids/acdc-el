@@ -54,7 +54,7 @@
                 <li>
                     <div class="dropdown user clearfix">
                         <a href="#" data-toggle="dropdown">
-                            <figure><img src="img/avatar1.jpg" alt=""></figure>
+                            <figure><img src="{% static 'web/img/avatar1.jpg' %}" alt=""></figure>
                             {{ user.get_full_name|truncatechars:15 }}
                         </a>
                         <div class="dropdown-menu">
@@ -116,7 +116,6 @@
                         <ul>
                             <li><a href="/about">About us</a></li>
                             <li><a href="#">Help</a></li>
-                            <li><a href="#">My account</a></li>
                             <li><a href="#">Blog</a></li>
                             <li><a href="#">Contacts</a></li>
                         </ul>
@@ -126,9 +125,7 @@
                     <h3 data-target="#collapse_2">Categories</h3>
                     <div class="collapse dont-collapse-sm links" id="collapse_2">
                         <ul>
-                            <li><a href="#">Categories</a></li>
-                            <li><a href="#">Best Rated</a></li>
-                            <li><a href="#">Best Price</a></li>
+                            <li><a href="#">Categories</a></li>                   
                             <li><a href="#">Latest Submissions</a></li>
                         </ul>
                     </div>
@@ -137,9 +134,9 @@
                     <h3 data-target="#collapse_3">Contacts</h3>
                     <div class="collapse dont-collapse-sm contacts" id="collapse_3">
                         <ul>
-                            <li><i class="icon_house_alt"></i>97845 Baker st. 567<br>Los Angeles - US</li>
-                            <li><i class="icon_mobile"></i>+94 423-23-221</li>
-                            <li><i class="icon_mail_alt"></i><a href="#0">info@domain.com</a></li>
+                            <li><i class="icon_house_alt"></i>P.O. Box 3297 <br>Morogoro, Tanzania</li>
+                            <li><i class="icon_mobile"></i> (+255) 232 640 037</li>
+                            <li><i class="icon_mail_alt"></i><a href="#0"> secretariat@sacids.org</a></li>
                         </ul>
                     </div>
                 </div>
