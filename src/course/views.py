@@ -5,7 +5,6 @@ from django.views import generic
 from django.contrib.auth.models import User
 
 # Create your views here.
-
 class PathListView(generic.ListView):
     model                   = ElPath
     context_object_name     = 'course_list'
