@@ -26,7 +26,6 @@ $(document).ready(function() {
 
 
 $(document).ready(function(){
-
     $(".section_item").click(function(){
 
         var lesson_id   = $(this).attr('wrp_id');
@@ -88,9 +87,8 @@ $(document).ready(function(){
 
     //onclick resource tab
     $('#resources-tab').on("click",function () {
+        //variables
         var lesson_id = $(this).attr('ls-id');
-
-        //base url
         var base_url=window.location.origin;
 
         $.ajax({
@@ -107,11 +105,13 @@ $(document).ready(function(){
 
                     html +="<ul>";
                     $.each(resources, function(i, resource){
+                        var formatted=$.datepicker.formatDate("M d, yy",new Date(resource.created_on));
+
                         html+="<li>"+
                         "<div class='media v-middle'>" +
                         "<div class='media-body text-body-2'>" +
                         "<h5>" + resource.title + "</h5>" +
-                        "<p>Posted on " + resource.created_on + "</p>" +
+                        "<p>Posted on " + formatted + "</p>" +
                         "<p>" + resource.description + "</p>" +
                         "<a href='#' download class='btn btn-primary btn-sm'><i class='fa fa-download'></i> Download</a>" +
                         "</div>" +
@@ -122,7 +122,7 @@ $(document).ready(function(){
                 } else {
                     html='<div class="alert alert-danger">No data available</div>';
                 }
-                $("#results").html(html);
+                $("#rs-resources").html(html);
             }
         });
     });
@@ -182,9 +182,9 @@ $(document).ready(function(){
         var base_url=window.location.origin;
 
         //post data
-        var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
-        var el_path_id = $('input[name=el_path]').val();
-        var note = $.trim($("#note").val());
+        var csrf_token      = $('input[name=csrfmiddlewaretoken]').val();
+        var el_lesson_id    = $('input[name=el_lesson_id]').val();
+        var note            = $.trim($("#note").val());
 
         //ajax post
         $.ajax({
@@ -192,19 +192,30 @@ $(document).ready(function(){
             data: {
                 csrfmiddlewaretoken: csrf_token,
                 description: note,
-                table_name: "el_path",
-                table_id: el_path_id
+                table_name: "el_lessons",
+                table_id: el_lesson_id
             },
             type: "POST",
             dataType: "json",
 
             //success
             success: function (data) {
-                if (data.status==="success") {
-                    alert("Success insertion");
+                var html="";
 
-                    //todo : append new note
+                if (data.status === "success") {
+                    //append new note
+                    var formatted = $.datepicker.formatDate("M d, yy",new Date());
 
+                    html+="<li>"+
+                        "<div class='media v-middle'>"+
+                        "<div class='media-body text-body-2'>"+
+                        "<p>Posted on "+formatted+"</p>"+
+                        "<p>"+note+"</p>"+
+                        "</div>"+
+                        "</div>"+
+                        "</li>";
+
+                    $("#n-notes").append(html);
                 }
 
                 if (data.status==="failed") {
@@ -217,4 +228,45 @@ $(document).ready(function(){
         });
 
     });
+
+    //notes
+    $('#notes-tab').on("click",function () {
+        //variables
+        var lesson_id = $(this).attr('ls-id');
+        var base_url  = window.location.origin;
+
+        $.ajax({
+            url: base_url+"/api/notes/retrieve/el_lessons/" + lesson_id,
+            type: "GET",
+            dataType: "json",
+
+            //success
+            success: function (data) {
+                var html="";
+
+                if (data.status === "success") {
+                    var notes = data.notes;
+
+                    html+="<ul id='n-notes'>";
+                    $.each(notes,function (i,note) {
+                        var formatted=$.datepicker.formatDate("M d, yy",new Date(note.created_on));
+
+                        html+="<li>"+
+                            "<div class='media v-middle'>"+
+                            "<div class='media-body text-body-2'>"+
+                            "<p>Posted on "+ formatted+"</p>"+
+                            "<p>"+note.description+"</p>"+
+                            "</div>"+
+                            "</div>"+
+                            "</li>";
+                    });
+                    html+="</ul>";
+                } else {
+                    html='<div class="alert alert-danger">No data available</div>';
+                }
+                $("#rs-notes").html(html);
+            }
+        });
+    });
+
   });

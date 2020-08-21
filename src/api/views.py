@@ -167,11 +167,14 @@ class Notes(viewsets.ViewSet):
     """
 
     def retrieve(self, request, table_name, table_id):
-        notes = Note.objects.filter(
-            table_name=table_name, table_id=table_id)
-        serializer = serializers.NoteSerializer(
-            notes, many=True)
-        return Response(serializer.data)
+        response_data = {}  # response
+
+        notes = Note.objects.filter(table_name=table_name, table_id=table_id)
+        serializer = serializers.NoteSerializer(notes, many=True)
+
+        response_data['status'] = 'success'
+        response_data['notes'] = serializer.data
+        return Response(response_data)
 
     """
     A simple ViewSet for storing notes

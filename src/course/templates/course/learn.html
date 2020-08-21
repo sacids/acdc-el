@@ -23,9 +23,9 @@
         <!--./lesson-content-->
     </div><!-- ./course_content_wrp-->
 
-    <div class="course_curriulmn_wrp" >
+    <div class="course_curriulmn_wrp">
         <input type="hidden" id="c_url" value="{{ course.get_absolute_url }}" />
-        <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal"  id="scrollable">
+        <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal" id="scrollable">
             {% for section in curriculum %}
             <div class="list-group-item1 section_item ripple ripple-dark-fade" id="si_{{ section.id}}"
                 wrp_id="section_{{ section.id }}">
@@ -39,8 +39,8 @@
             <div class="lesson_wrp" id="section_{{ section.id }}"
                 {% if somo.section_id != section.id %}style="display:none" {% endif %}>
                 {% for l in section.lesson.all %}
-                <div class="lesson_item {% if l.id == somo.id %}les{% endif %}"
-                    lesson_src="{{ l.content.url }}" href="{{ l.id }}">
+                <div class="lesson_item {% if l.id == somo.id %}les{% endif %}" lesson_src="{{ l.content.url }}"
+                    href="{{ l.id }}">
                     <div class="lesson_cb"><i class="fa fa-square"></i></div>
                     <div class="ripple ripple-dark-fade lesson_txt">{{ l.title }}</div>
                 </div>
@@ -49,7 +49,7 @@
             </div>
             <!--./lesson wrp-->
             {% endfor %}
-        <div style="height:400px"> testo </div>
+
         </div>
         <!--./course-sections-->
     </div><!-- ./course_sections_wrp-->
@@ -66,10 +66,10 @@
                             <i class="fa fa-fw fa-home"></i> About</a>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" id="qn-tab" data-toggle="tab" href="#qn" role="tab" aria-selected="true">
                             <i class="fa fa-fw fa-question"></i> Q&A</a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link" id="announcements-tab" data-toggle="tab" href="#announcements" role="tab"
@@ -77,13 +77,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" ls-id="ls-id"
+                        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" ls-id="{{ lesson_id }}"
                             role="tab" aria-selected="false"><i class="fa fa-fw fa-folder-open-o"></i> Resources</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab"
-                            aria-selected="false"><i class="fa fa-fw fa-book"></i> Notes</a>
+                        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" ls-id="{{ lesson_id }}"
+                        role="tab" aria-selected="false"><i class="fa fa-fw fa-book"></i> Notes</a>
                     </li>
                 </ul>
 
@@ -244,7 +244,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="info padding">
-                                            <div id="results"></div>
+                                            <div id="rs-resources"></div>
                                             <!--./ results-->
                                         </div>
                                         <!--./info -->
@@ -274,7 +274,8 @@
 
                                             <form id="form-note" autocomplete="off">
                                                 {% csrf_token %}
-                                                <input type="hidden" name="el_path" id="el_path" value="{{ val.id }}" />
+                                                <input type="hidden" name="el_lesson_id" id="el_lesson_id"
+                                                    value="{{ lesson_id }}" />
 
                                                 <div class="row">
                                                     <div class="col-md-12 col-12">
@@ -305,20 +306,8 @@
                                             </form>
 
                                             <hr />
-                                            <ul class="">
-                                                {% for val in notes %}
-                                                <li class="">
-                                                    <div class="media v-middle">
-                                                        <div class="media-body text-body-2">
-                                                            <h5>{{val.title }}</h5>
-                                                            <p class="posted">Posted on {{ val.created_on}} </p>
-                                                            <p>{{ val.description }}</p>
-                                                            <!--./row -->
-                                                        </div><!-- ./media-body -->
-                                                    </div><!-- ./ media -->
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
+                                            <div id="rs-notes"></div>
+                                            <!--./ notes results-->
 
                                         </div>
                                         <!--./info -->
@@ -331,8 +320,6 @@
                         </div>
                     </div>
                     <!-- /tab -->
-
-
                 </div>
                 <!-- /tab-content -->
             </div>
