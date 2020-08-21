@@ -85,7 +85,7 @@ $(document).ready(function(){
     });
 
 
-    //onclick resource tab
+    //resource tab
     $('#resources-tab').on("click",function () {
         //variables
         var lesson_id = $(this).attr('ls-id');
