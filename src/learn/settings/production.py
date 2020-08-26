@@ -26,7 +26,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Must mention ALLOWED_HOSTS in production!
-# ALLOWED_HOSTS = ["learn.com"]
+ALLOWED_HOSTS = ["*"]
 
 # Cache the templates in memory for speed-up
 loaders = [
@@ -43,7 +43,11 @@ TEMPLATES[0]["OPTIONS"].update({"loaders": loaders})
 TEMPLATES[0].update({"APP_DIRS": False})
 
 # Define STATIC_ROOT for the collectstatic command
-STATIC_ROOT = str(BASE_DIR.parent / "site" / "static")
+#STATIC_ROOT = str(BASE_DIR.parent / "site" / "static")
+
+# Define STATIC_ROOT for the collectstatic command
+STATIC_ROOT = "/static/"
+
 
 # Log everything to the logs directory at the top
 LOGFILE_ROOT = BASE_DIR.parent / "logs"

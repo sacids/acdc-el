@@ -22,6 +22,7 @@ class ShowProfile(LoginRequiredMixin, generic.TemplateView):
         if user == self.request.user:
             kwargs["editable"] = True
         kwargs["show_user"] = user
+        kwargs["title"] = "My Profile"
         return super().get(request, *args, **kwargs)
 
 

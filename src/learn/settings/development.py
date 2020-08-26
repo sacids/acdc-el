@@ -36,6 +36,9 @@ THUMBNAIL_DEBUG = True
 # Allow internal IPs for debugging
 INTERNAL_IPS = ["127.0.0.1", "0.0.0.1"]
 
+#static root
+STATIC_ROOT = "/static/"
+
 # Log everything to the logs directory at the top
 LOGFILE_ROOT = BASE_DIR.parent / "logs"
 
