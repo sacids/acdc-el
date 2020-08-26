@@ -1,18 +1,44 @@
+/* For mobile phones: */
 
-.course_content_wrp{
-    width: calc(100vw - 350px);
-    height: 100%;
+@media screen and (min-width: 480px) {
+    .flexbox {
+        display: flex;
+        flex-direction: column;
+    }
+    .course_content_wrp {
+        width: 100%;
+        height: 100%;
+    }
+    .course_curriulmn_wrp {
+        width: 100%;
+        height: 100%;
+        margin-top: 10px;
+    }
+    .course_sections_wrp {
+        height: 100%;
+        overflow-y: auto;
+        position: relative;
+    }
 }
 
-.course_curriulmn_wrp{
-    width: 350px;
-    height: 100%;
-}
-
-.course_sections_wrp {
-    height:100%;
-    overflow-y: auto;
-    position: relative;
+@media only screen and (min-width: 768px) {
+    .flexbox {
+        display: flex;
+        flex-direction: row;
+    }
+    .course_content_wrp {
+        width: calc(100vw - 350px);
+        height: 100%;
+    }
+    .course_curriulmn_wrp {
+        width: 350px;
+        height: 100%;
+    }
+    .course_sections_wrp {
+        height: 100%;
+        overflow-y: auto;
+        position: relative;
+    }
 }
 
 .section_item {
@@ -40,7 +66,7 @@
     flex-wrap: nowrap;
     cursor: pointer;
     font-size: 0.9em;
-    padding-left:10px;
+    padding-left: 10px;
 }
 
 .lesson_item:hover, .section_item:hover {
@@ -64,10 +90,6 @@
 .active_item {
     background-color: #1b2531;
 }
-
-/*
-My Course List
-*/
 
 .mcl_title_wrp {
     font-size: 1.3em;
