@@ -104,7 +104,7 @@ class PathDetailView(generic.DetailView):
         context = super(PathDetailView, self).get_context_data(**kwargs)
         context['curriculum'] = Section.objects.filter(
             el_path_id=Reg.el_path_id).prefetch_related('lesson')
-        return render(request, "course/start.html", context)
+        return render(request, "course/learn.html", context)
 
 # section
 

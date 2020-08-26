@@ -134,61 +134,6 @@
                     </div>
                     <!-- /tab -->
 
-                    <div id="qn" class="card tab-pane fade" role="tabpanel" aria-labelledby="qn-tab">
-                        <div class="card-header" role="tab" id="heading-B">
-                            <h5>
-                                <a class="collapsed" data-toggle="collapse" href="#collapse-C" aria-expanded="false"
-                                    aria-controls="collapse-B">
-                                    Questions and Answers
-                                </a>
-                            </h5>
-                        </div>
-                        <div id="qn" class="collapse" role="tabpanel" aria-labelledby="heading-B">
-                            <div class="card-body reviews">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="info padding">
-
-                                            <div class="row" style="padding-top: 10px;">
-                                                <div class="col-md-6">
-
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="pull-right">
-                                                        <a class="" data-toggle="modal" data-target="#exampleModal">Ask
-                                                            a new
-                                                            question</a>
-                                                    </div>
-                                                </div>
-                                            </div><!-- ./row-->
-                                            <hr />
-
-                                            <ul class="">
-                                                {% for val in questions %}
-                                                <li class="">
-                                                    <div class="media v-middle">
-                                                        <div class="media-body text-body-2">
-                                                            <h5>{{val.title }}</h5>
-                                                            <p class="posted">Posted on {{ val.created_on}} </p>
-                                                            <p>{{ val.answers }}</p>
-                                                            <!--./row -->
-                                                        </div><!-- ./media-body -->
-                                                    </div><!-- ./ media -->
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <!--./info -->
-                                    </div>
-                                    <!--./col-md-12 -->
-                                </div>
-                                <!--./row -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /tab -->
-
                     <div id="announcements" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
                         <div class="card-header" role="tab" id="heading-C">
                             <h5>
