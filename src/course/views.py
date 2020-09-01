@@ -74,7 +74,7 @@ class PathDetailView(generic.DetailView):
             el_path_id=course_id).select_related('instructor')
         context['announcements'] = Announcement.objects.filter(
             table_name="el_path", table_id=course_id)
-        context['title'] = "course details"
+        context['title'] = "Course details"
         return context
 
     def isRegisterdToCourse(self, course_id):

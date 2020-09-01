@@ -4,8 +4,7 @@ $.fn.exists = function () {
     return this.length !== 0;
 }
 
-$(document).ready(function() {
-    
+$(document).ready(function() {  
     if( $('.les').exists() ){
         var video_src   = $('.les').attr('lesson_src');
         //$("#lesson_content_vid source").attr('src', video_src);
@@ -84,6 +83,16 @@ $(document).ready(function(){
         }
     });
 
+    //mobile version
+    $("#btn-open").on("click", function(e){
+        e.preventDefault;
+        $('.course_curriulmn_wrp').css("width","100%");
+    });
+
+    $('#btn-close').on("click", function(e){
+        e.preventDefault;
+        $('.course_curriulmn_wrp').css("width",0);
+    });
 
     //resource tab
     $('#resources-tab').on("click",function () {

@@ -15,7 +15,7 @@
 <div class="page-video flexbox">
     <div class="course_content_wrp">
         <div class="lesson_content">
-            <video id="lesson_content_vid" controls autoplay>
+            <video id="lesson_content_vid" controls autoplay width="1280" height="720">
                 <source id="mp4_src" src="mov_bbb.mp4" type="video/mp4">
                 Your browser does not support HTML5 video.
             </video>
@@ -23,7 +23,11 @@
         <!--./lesson-content-->
     </div><!-- ./course_content_wrp-->
 
-    <div class="course_curriulmn_wrp">
+    <div class="course_curriulmn_wrp" id="mySidenav">
+        <span class="pull-right">
+            <a href="javascript:void(0)" id="btn-close">&times; Close</a>
+        </span>
+
         <input type="hidden" id="c_url" value="{{ course.get_absolute_url }}" />
         <div class="course_sections_wrp sidebar-block list-group list-group-menu list-group-minimal" id="scrollable">
             {% for section in curriculum %}
@@ -49,12 +53,25 @@
             </div>
             <!--./lesson wrp-->
             {% endfor %}
-
         </div>
         <!--./course-sections-->
     </div><!-- ./course_sections_wrp-->
 </div>
 <!--./page-video-->
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="javascript:void(0)" id="btn-open" class="btn btn-primary ">
+                Curricullum
+                <span class="pull-right"><i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></span>
+            </a>
+        </div>
+        <!--./col-lg-12-->
+    </div>
+    <!--./row-->
+</div>
+<!--./container-->
 
 <div class="container">
     <div class="row">
@@ -77,13 +94,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" ls-id="{{ lesson_id }}"
-                            role="tab" aria-selected="false"><i class="fa fa-fw fa-folder-open-o"></i> Resources</a>
+                        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources"
+                            ls-id="{{ lesson_id }}" role="tab" aria-selected="false"><i
+                                class="fa fa-fw fa-folder-open-o"></i> Resources</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" ls-id="{{ lesson_id }}"
-                        role="tab" aria-selected="false"><i class="fa fa-fw fa-book"></i> Notes</a>
+                            role="tab" aria-selected="false"><i class="fa fa-fw fa-book"></i> Notes</a>
                     </li>
                 </ul>
 
