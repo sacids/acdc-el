@@ -5,6 +5,11 @@ from django.conf import settings
 import os
 
 
+class LessonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Lesson
+        fields = '__all__'
+
 class AnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Announcement

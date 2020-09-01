@@ -7,6 +7,28 @@ from rest_framework.response import Response
 
 # Create your views here.
 
+# Lesson
+
+
+class Lessons(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing  announcements.
+    """
+
+    def lists(self, request):
+        lessons = Lesson.objects.all()
+        serializer = serializers.LessonSerializer(lessons, many=True)
+        return Response(serializer.data)
+
+    """
+    A simple ViewSet for retrieve lesson based on id
+    """
+
+    def details(self, request, id):
+        lesson = Lesson.objects.get(pk=id)
+        serializer = serializers.LessonSerializer(lesson, many=True)
+        return Response(serializer.data)
+
 # Announcements
 
 
@@ -251,7 +273,8 @@ class Resources(viewsets.ViewSet):
     def retrieve(self, request, table_name, table_id):
         response_data = {}  # response
 
-        resources = Resource.objects.filter(table_name=table_name, table_id=table_id)
+        resources = Resource.objects.filter(
+            table_name=table_name, table_id=table_id)
         serializer = serializers.ResourceSerializer(resources, many=True)
 
         response_data['status'] = 'success'
